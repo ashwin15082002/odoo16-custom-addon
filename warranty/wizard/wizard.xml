@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+     <!--    wizard view-->
+    <record id="test_wizard_view_form" model="ir.ui.view">
+        <field name="name">warranty.wizard.form</field>
+        <field name="model">warranty.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Warranty Wizard">
+                <group class="oe_title">
+                    <group>
+                        <field name="customer"/>
+
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+
+                        <field name="end_date"/>
+                    </group>
+                </group>
+
+                <group>
+                    <field name="product_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="button_pdf" class="oe_highlight"
+                            string="PDF" type="object"/>
+                    <button name="button_xlsx" class="oe_highlight"
+                            string="XLSX" type="object"/>
+                    <button string="Cancel" class="btn-danger" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <!--    wizard action-->
+
+    <record id="test_wizard_action" model="ir.actions.act_window">
+        <field name="name">Warranty Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">warranty.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="test_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
+

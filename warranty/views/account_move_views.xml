@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+<!--        inherited invoice form view        -->
+        <record id="invoice_inherit_form_view" model="ir.ui.view">
+            <field name="name">account.move.inherit.form.view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//page[@id='other_tab']" position="after">
+                    <page string="Warranty Info">
+                        <field name="warranty_request_ids"  attrs="{'readonly': True}">
+                            <tree options="{'no_create': True}">
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="product_id"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

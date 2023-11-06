@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <!--  production  sequence    -->
+
+        <record id="sequence_id" model="ir.sequence">
+            <field name="name">PRO</field>
+            <field name="code">sequence_product_code</field>
+            <field name="prefix">PRO</field>
+            <field name="padding">5</field>
+
+        </record>
+
+    </data>
+</odoo>

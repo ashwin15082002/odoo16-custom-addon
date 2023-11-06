@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+<!--        tree view       -->
+     <record id="approval_block_tree_view" model="ir.ui.view">
+          <field name="name">approval.block.tree</field>
+          <field name="model">approval.block</field>
+          <field name="arch" type="xml">
+               <tree string="amount_limit" default_order='amount_limit desc'>
+                   <field name="name"/>
+                   <field name="amount_limit"/>
+               </tree>
+          </field>
+     </record>
+
+<!--      form view       -->
+    <record id="approval_block_view" model="ir.ui.view">
+              <field name="name">approval.block.form</field>
+              <field name="model">approval.block</field>
+              <field name="arch" type="xml">
+                  <form string="approval_block">
+                      <sheet>
+                          <group>
+                              <field name="name"/>
+                              <field name="amount_limit"/>
+
+                          </group>
+                      </sheet>
+                      <div class="oe_chatter">
+                          <field name="message_follower_ids" widget="mail_followers"/>
+                          <field name="message_ids" widget="mail_thread"/>
+                      </div>
+                  </form>
+          </field>
+     </record>
+
+</odoo>

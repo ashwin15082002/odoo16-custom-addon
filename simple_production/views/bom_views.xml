@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+
+    <!--        tree view bom      -->
+    <record id="bom_tree_view" model="ir.ui.view">
+        <field name="name">bom.tree</field>
+        <field name="model">bom.bom</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--        form view BOM -->
+    <record id="BOM_form" model="ir.ui.view">
+        <field name="name">Bom.form</field>
+        <field name="model">bom.bom</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" invisible="1"/>
+                        <field name="product_id"/>
+                    </group>
+
+                    <field name="bom_line_ids" required="1">
+                        <tree editable="bottom">
+                            <field name="component_products_id"/>
+                            <field name="qty"/>
+                        </tree>
+                    </field>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

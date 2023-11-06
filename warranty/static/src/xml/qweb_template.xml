@@ -1,0 +1,52 @@
+<templates>
+
+    <t t-name="warranty.carousel_temp">
+        <div t-attf-id="car-{{new_id}}" class="container carousel slide"
+             data-bs-ride="carousel" t-att-data-bs-interval="interval">
+            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <t t-foreach="chunks" t-as="chunk">
+                    <div t-att-class="chunk.is_active ? 'carousel-item active' : 'carousel-item'">
+                        <div class="row">
+                            <t t-foreach="chunk" t-as="item">
+                                <div class="card col-3">
+                                    <div class="card-header">
+                                        <b>
+                                            <span t-esc="item.name"/>
+                                        </b>
+                                        <span t-esc="item.customer_id[1]"/>
+                                    </div>
+                                    <div class="card-body">
+                                        <a t-attf-href="/view/{{item.id}}">
+                                            <img class="card-img-top"
+                                                 t-attf-src="data:image/png;base64,{{item.image}}"/>
+                                        </a>
+
+                                        <span t-esc="item.product_id[1]"/>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="row">
+                                            <a t-attf-href="/view/{{item.id}}"
+                                               class="btn btn-primary">View
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+        <a t-attf-href="#car-{{new_id}}"
+           data-bs-slide="prev" role="button" aria-label="Previous"
+           title="Previous">
+            <span class="fa fa-chevron-circle-left fa-2x"/>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a t-attf-href="#car-{{new_id}}"
+           data-bs-slide="next" role="button" aria-label="Next" title="Next">
+            <span class="fa fa-chevron-circle-right fa-2x"/>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </t>
+</templates>

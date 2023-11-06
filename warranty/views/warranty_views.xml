@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--tree view-->
+    <record id="warranty_tree_view" model="ir.ui.view">
+        <field name="name">warranty.tree</field>
+        <field name="model">warranty</field>
+        <field name="arch" type="xml">
+            <tree string="warranty">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="invoice_id"/>
+                <field name="product_id"/>
+                <field name="customer_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--form view-->
+
+    <record id="warranty_form_view" model="ir.ui.view">
+        <field name="name">warranty.form</field>
+        <field name="model">warranty</field>
+        <field name="arch" type="xml">
+            <form string="warranty">
+                <header>
+                    <button name="button_confirm" class="oe_highlight" states="draft" string="Submit" type="object"/>
+                    <!--                       <button name="button_cancel" class="oe_highlight" states="to approve" string="Cancel" type="object"/>-->
+                    <!--                       <button name="button_approve" string="Approve" type="object" states="to approve" groups="warranty_module_management.warranty_manager"/>-->
+                    <button string="Approve" name="button_approve" type="object" class="oe_highlight"
+                            states="to approve" groups="warranty.warranty_manager"/>
+                    <button name="button_return_product" class="oe_highlight" states="received" string="Return Product"
+                            type="object"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button string="Stock Moves" name="action_view_stock_moves" type="object" icon="fa-bars"
+                                class="oe_highlight" states="received,done"/>
+                    </div>
+
+                    <div>
+                        <field name='name' style="font-size:35pt;" placeholder="Name"
+                               attrs="{'invisible':[('state', '=','draft')]}"/>
+                    </div>
+                    <group>
+                        <group>
+
+                            <field name="invoice_id"/>
+                            <field name="product_id"/>
+                            <field name="available_ids" invisible="1"/>
+                            <field name="lot_id"/>
+
+                        </group>
+                        <group>
+                            <group name="partner_details">
+                                <field name="customer_id" widget="res_partner_many2one"
+                                       context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}"
+                                       options="{&quot;always_reload&quot;: True}"/>
+                                <field name="invoice_id" groups="account.group_delivery_invoice_address"
+                                       context="{'default_type':'invoice'}"
+                                       options="{&quot;always_reload&quot;: True}"/>
+                                <field name="date"/>
+                                <field name="purchase_date"/>
+                                <field name="warranty_expire_date"/>
+"
+                            </group>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+</odoo>

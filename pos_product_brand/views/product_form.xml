@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="product_product_inherit_form_view" model="ir.ui.view">
+            <field name="name">product.product.inherit.form.view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id"
+                   ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='group_standard_price']" position="inside">
+                        <field name="brand"/>
+                </xpath>
+
+
+            </field>
+        </record>
+    </data>
+
+</odoo>

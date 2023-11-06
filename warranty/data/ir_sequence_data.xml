@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data noupdate="1">
+
+<!--    sequence    -->
+
+    <record id="my_sequence_id" model="ir.sequence">
+        <field name="name">warranty request</field>
+        <field name="code">sequence_code</field>
+        <field name="prefix">WR</field>
+        <field name="padding">5</field>
+
+    </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <!--    warranty request form -->
+    <template id="warranty_request_template" name="warranty_request">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h2 align="center">WARRANTY</h2>
+                </div>
+                <form class="form" method="post" id="warranty_form"
+                      action="/create/warranty">
+                    <div class="row">
+                        <div class="col">
+                            <label for="invoice_id">
+                                Invoice
+                            </label>
+                            <select id="invoice_id" name="invoice"
+                                    required="1"
+                                    class="form-control">
+                                <option value="">Select Invoice</option>
+                                <t t-foreach="invoice_id" t-as="invoice">
+                                    <option t-att-value="invoice.id">
+                                        <t t-esc="invoice.name"/>
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="product_ids">
+                                Product
+                            </label>
+
+                            <select id="product_ids" name="product"
+                                    required="1"
+                                    class="form-control">
+                                <option value="">Select Product</option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="date">Request Date:</label>
+                            <input id="date" type="date" t-att-value="date"
+                                   name="date"
+                                   class="form-control"/>
+                        </div>
+                        <div class="col">
+                            <label for="purchase_date">Purchase Date:</label>
+                            <input type="date" id="purchase_date"
+                                   name="purchase_date"
+                                   readonly="True"
+                                   force_save="1"
+                                   class="form-control"/>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <label for="expiry_date">Expiry Date:</label>
+                            <input type="date" id="expiry_date"
+                                   name="expiry_date"
+                                   readonly="True"
+                                   class="form-control"/>
+                        </div>
+                        <div class="col">
+                            <label for="customer">Customer:</label>
+                            <input type="text" id="customer"
+                                   name="customer"
+                                   readonly="True"
+                                   class="form-control"/>
+                            <input type="hidden" id="customer_id"
+                                   name="customer_id"
+                                   readonly="True"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top:10px" align="center">
+                        <button id="submit_request" type="submit" class="btn btn-primary" disabled="1">Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+    <!--  warranty  successfully created -->
+    <template id="website_warranty_success_template" name="Success">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="alert alert-success">
+                    <span>Successfully Created Warranty Request</span>
+                </div>
+
+                <div class="card-footer">
+                    <a t-attf-href="/warranty" class="btn btn-secondary">Go
+                        Back
+                    </a>
+                </div>
+            </div>
+        </t>
+    </template>
+    <!--    warranty list view-->
+    <template id="warranty_request_list_template" name="warranty_list">
+        <t t-call="website.layout">
+            <div class="container">
+                <div>
+                    <h2 align="center">Warranty Requests</h2>
+                </div>
+                <table class="table table-bordered">
+                    <thead align="center">
+                        <tr>
+                            <th>Warranty</th>
+                            <th>Invoice</th>
+                            <th>Product</th>
+                            <th>Customer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="warranty_req" t-as="req">
+                            <tr align="center">
+                                <td>
+                                    <t t-esc="req.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="req.invoice_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="req.product_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="req.customer_id.name"/>
+                                </td>
+
+                            </tr>
+                        </t>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </t>
+    </template>
+
+
+    <!--    warranty view data -->
+
+    <template id="warranty_view_data" name="warranty_view">
+        <t t-call="website.layout">
+            <div class="container" align="center">
+                <div>
+                    <h2 align="center">Warranty Requests</h2>
+                </div>
+                <div class="col-md-5">
+
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label>
+                                <b>Name</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="name"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;" t-att-value="warranty_id.name"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label for="customer">
+                                <b>Customer</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="customer"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;"
+                                   t-att-value="warranty_id.customer_id.name"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label for="invoice_id">
+                                <b>Invoice</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="invoice_id"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;"
+                                   t-att-value="warranty_id.invoice_id.name"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label for="product">
+                                <b>Product</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="product"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;"
+                                   t-att-value="warranty_id.product_id.name"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label for="date">
+                                <b>Date</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="date"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;" t-att-value="warranty_id.date"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 d-flex align-items-center">
+                            <label for="expiry">
+                                <b>Expiry</b>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="expiry"
+                                   class="form-control text-center"
+                                   style="margin-top: 10px;"
+                                   t-att-value="warranty_id.warranty_expire_date"
+                                   readonly="1"/>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px">
+                        <button class="btn btn-primary" onclick="history.back()">Back</button>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>
+
+

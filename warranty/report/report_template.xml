@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_warranty">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="text-center">
+                        <h2 style="font-family:Calibri"> Product Warranty</h2>
+                    </div>
+                    <div>
+                        <t t-if="customer">
+                            <span>Customer :</span>
+                            <span>
+                                <t t-esc="customer"/>
+                            </span>
+                        </t>
+                    </div>
+                    <div>
+                        <t t-if="start_date">
+                            <span>Start Date :</span>
+                            <span>
+                                <t t-esc="start_date"/>
+                            </span>
+                        </t>
+                    </div>
+                    <div>
+                        <t t-if="end_date">
+                            <span>End Date :</span>
+                            <span>
+                                <t t-esc="end_date"/>
+                            </span>
+                        </t>
+                    </div>
+
+                    <br/>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span>Warranty</span>
+                                </th>
+                                <th>
+                                    <span>Customer</span>
+                                </th>
+                                <th>
+                                    <span>Product</span>
+                                </th>
+                                <th>
+                                    <span>Request Date</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <t t-foreach="report" t-as="record">
+
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <span>
+                                            <t t-esc="record.get('warranty')"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <span>
+                                            <t t-esc="record.get('customer')"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <span>
+                                            <t t-esc="record.get('product')"/>
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <span>
+                                            <t t-esc="record.get('date')"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+
+    </template>
+</odoo>

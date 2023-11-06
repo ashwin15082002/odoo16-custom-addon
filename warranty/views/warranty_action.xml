@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <data>
+<!-- action warranty-->
+         <record id="action_warranty" model="ir.actions.act_window">
+             <field name="name">Warranty</field>
+             <field name="res_model">warranty</field>
+             <field name="view_mode">tree,form</field>
+             <field name="help" type="html">
+                 <p class="o_view_nocontent_smiling_face">Create</p>
+             </field>
+         </record>
+
+         <menuitem id="warranty_menu_root" name="Warranty"/>
+                 <menuitem id="warranty_first_menu_root" name="Warranty" parent="warranty_menu_root" action="action_warranty"/>
+                 <menuitem id="warranty_second_menu_root" name="Warranty Report" parent="warranty_menu_root" action="test_wizard_action"/>
+
+     </data>
+</odoo>

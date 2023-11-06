@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="warranty_snippet"
+              inherit_id="website.snippets" name="warranty snippets">
+        <xpath expr="//div[@id='snippet_effect']" position="inside">
+            <div class="o_panel_body">
+                <t t-snippet="most_sold_product.warranty_snippets"
+                t-thumbnail="most_sold_product/static/src/img/prod.jpg"/>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="warranty_snippets" name="Product">
+        <section class="container dynamic_snippet_blog"
+                 id="dynamic_snippet">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center py-5">
+                        <h1>
+                            PRODUCTS
+                        </h1>
+                        <div class="h3" style="text-align:center">Most
+                            Sold Products
+                        </div>
+                        <div id="courosel"/>
+                        <div class="h3" style="text-align:center">Most
+                            Viewed Products
+                        </div>
+                        <div id="most_view"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+</odoo>

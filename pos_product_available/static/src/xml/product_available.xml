@@ -1,0 +1,29 @@
+<template>
+    <t t-name="ProductItem" t-inherit="point_of_sale.ProductItem"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[@class='price-tag']"
+               position="inside">
+            <br/>
+
+            <t t-if="0 >= props.product.pos_avl_qty">
+                <span style="color:red">
+                    Available Qty:
+                    <t t-esc="props.product.pos_avl_qty"/>
+                </span>
+            </t>
+            <t t-elif="5 > props.product.pos_avl_qty">
+                <span style="color:orange">
+                    Available Qty:
+                    <t t-esc="props.product.pos_avl_qty"/>
+                </span>
+            </t>
+            <t t-else="">
+                <span style="color:green">
+                    Available Qty:
+                    <t t-esc="props.product.pos_avl_qty"/>
+                </span>
+            </t>
+
+        </xpath>
+    </t>
+</template>

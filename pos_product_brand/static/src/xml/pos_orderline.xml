@@ -1,0 +1,11 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[@class='product-name']" position="inside">
+            <t t-if="props.line.product.brand">
+                <br/>Brand :
+                    <t t-esc="props.line.product.brand"/>
+            </t>
+        </xpath>
+    </t>
+</templates>

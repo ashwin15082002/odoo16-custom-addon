@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="warranty_snippet"
+                  inherit_id="website.snippets" name="warranty snippets">
+            <xpath expr="//div[@id='snippet_effect']" position="inside">
+                <div class="o_panel_body">
+                    <t t-snippet="warranty.warranty_snippets"
+                       t-thumbnail="/warranty/static/src/img/snippets/thumbnail.png"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>
+

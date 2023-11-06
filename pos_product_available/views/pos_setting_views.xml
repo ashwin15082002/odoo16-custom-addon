@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="pos_setting_form_inherit" model="ir.ui.view">
+        <field name="name">pos.setting.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id"
+               ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='pos_interface_section']"
+                   position="inside">
+
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <span class="o_form_label">Pos Product Location</span>
+                    <div class="text-muted">
+                        Select location, Product availability of this location is shown
+                    </div>
+                    <div class="content-group mt16">
+                        <label string="Location" for="locations" class="col-lg-3 o_light_label"/>
+                        <field name="locations"/>
+                    </div>
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

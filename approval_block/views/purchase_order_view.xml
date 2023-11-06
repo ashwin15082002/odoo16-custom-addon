@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+
+        <record id="purchase_order_view" model="ir.ui.view">
+            <field name="name">purchase.order.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="approval_block_id"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

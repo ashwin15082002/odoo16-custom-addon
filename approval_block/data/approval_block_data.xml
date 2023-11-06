@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+
+<!--    creating default data   -->
+
+        <record id="amount_limit_data_1" model="approval.block">
+            <field name="name">5k Block</field>
+            <field name="amount_limit">5000</field>
+        </record>
+        <record id="amount_limit_data_2" model="approval.block">
+            <field name="name">10k Block</field>
+            <field name="amount_limit">10000</field>
+        </record>
+
+    </data>
+</odoo>
