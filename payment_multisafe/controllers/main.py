@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import pprint
 
@@ -13,11 +15,13 @@ class MspController(http.Controller):
     @http.route(
         _return_url, type='http', auth='public', methods=['GET', 'POST'],
         csrf=False,
-        save_session=False
-    )
+        save_session=False)
     def msp_return_from_checkout(self, **data):
-        _logger.info("handling redirection from Mollie with data:\n%s",
+        """ Process the notification data sent by Mollie after redirection from checkout. """
+
+        _logger.info("handling redirection from Multisafe with data:\n%s",
                      pprint.pformat(data))
         request.env['payment.transaction'].sudo()._handle_notification_data(
             'multisafe', data)
+
         return request.redirect('/payment/status')
