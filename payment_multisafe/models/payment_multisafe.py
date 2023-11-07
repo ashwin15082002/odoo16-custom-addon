@@ -1,4 +1,3 @@
-import datetime
 import logging
 import requests
 from werkzeug import urls
@@ -29,36 +28,6 @@ class PaymentProvider(models.Model):
             "api_key": self.multisafe_api_key,
             "Content-Type": 'application/json',
             "accept": 'application/json'
-        }
-        data = {
-            "order_id": 'datetime512',
-            "gateway": "",
-            "currency": "EUR",
-            "amount": 1000,
-            "description": "Test order description",
-            "payment_options": {
-                "notification_url": "https://www.example.com/client/notification?type=notification",
-                "notification_method": "POST",
-                "redirect_url": "urls.url_join(base_url, MspController._return_url",
-                "cancel_url": "https://www.example.com/client/notification?type=cancel",
-                "close_window": True
-            },
-            "customer": {
-                "locale": "en_US",
-                "ip_address": "123.123.123.123",
-                "first_name": "John",
-                "last_name": "Doe",
-                "company_name": "Test Company Name",
-                "address1": "Kraanspoor",
-                "house_number": "39C",
-                "zip_code": "1033SC",
-                "city": "Amsterdam",
-                "country": "US",
-                "phone": "0208500500",
-                "email": "jdoe@example.com",
-                "referrer": "https://example.com",
-                "user_agent": "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36"
-            }
         }
 
         try:

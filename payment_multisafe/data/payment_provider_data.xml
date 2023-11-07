@@ -8,8 +8,13 @@
         <field name="code">multisafe</field>
         <field name="image_128" type="base64"
                file="payment_multisafe/static/img/logo.png"/>
-        <field name="redirect_form_view_id" ref="redirect_form"/>
 
+    </record>
+    <record id="account_payment_method_multisafe"
+            model="account.payment.method">
+        <field name="name">Multisafe</field>
+        <field name="code">multisafe</field>
+        <field name="payment_type">inbound</field>
     </record>
 
 </odoo>

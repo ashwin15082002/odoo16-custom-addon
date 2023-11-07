@@ -16,7 +16,6 @@ class MspController(http.Controller):
         save_session=False
     )
     def msp_return_from_checkout(self, **data):
-        print('hiiiiiiiiiiiiiiiiii')
         _logger.info("handling redirection from Mollie with data:\n%s",
                      pprint.pformat(data))
         request.env['payment.transaction'].sudo()._handle_notification_data(

@@ -8,7 +8,6 @@ from odoo.exceptions import ValidationError
 
 from odoo.addons.payment_multisafe.controllers.main import MspController
 
-
 _logger = logging.getLogger(__name__)
 
 
@@ -23,11 +22,11 @@ class PaymentTransaction(models.Model):
 
         payload = self._msp_prepare_payment_request_payload()
         print('payload = ', payload)
-        _logger.info("sending '/payments' request for link creation:\n%s", pprint.pformat(payload))
-        payment_data = self.provider_id._msp_make_request('/json/orders', data=payload)
+        _logger.info("sending '/payments' request for link creation:\n%s",
+                     pprint.pformat(payload))
+        payment_data = self.provider_id._msp_make_request('/json/orders',
+                                                          data=payload)
         print('payment data = ', payment_data)
-
-        self.provider_reference = payment_data.get('id')
 
         checkout_url = payment_data['data']['payment_url']
         parsed_url = urls.url_parse(checkout_url)
@@ -38,30 +37,35 @@ class PaymentTransaction(models.Model):
 
         base_url = self.provider_id.get_base_url()
         redirect_url = urls.url_join(base_url, MspController._return_url)
+        print('asihiuasiu', self.read())
 
         return {
-            'description': self.reference,
-            'amount': {
-                'currency': self.currency_id.name,
-                'value': f"{self.amount:.2f}",
+            "order_id": self.id,
+            "currency": self.currency_id.name,
+            "amount": self.amount * 100,
+            "description": self.reference,
+            "payment_options": {
+                "redirect_url": f'{redirect_url}?ref={self.reference}',
+                "cancel_url": base_url + 'shop/payment',
+                "close_window": True
             },
-
-            'redirectUrl': f'{redirect_url}?ref={self.reference}',
-
+            "locale": self.partner_lang,
         }
 
     def _get_tx_from_notification_data(self, provider_code, notification_data):
-
-        tx = super()._get_tx_from_notification_data(provider_code, notification_data)
+        tx = super()._get_tx_from_notification_data(provider_code,
+                                                    notification_data)
         if provider_code != 'multisafe' or len(tx) == 1:
             return tx
 
         tx = self.search(
-            [('reference', '=', notification_data.get('ref')), ('provider_code', '=', 'multisafe')]
-        )
+            [('reference', '=', notification_data.get('ref')),
+             ('provider_code', '=', 'multisafe')])
+        print(tx)
         if not tx:
             raise ValidationError("Multisafe: " + _(
-                "No transaction found matching reference %s.", notification_data.get('ref')
+                "No transaction found matching reference %s.",
+                notification_data.get('ref')
             ))
         return tx
 
@@ -71,24 +75,4 @@ class PaymentTransaction(models.Model):
         if self.provider_code != 'multisafe':
             return
 
-        payment_data = self.provider_id._msp_make_request(
-            f'/payments/{self.provider_reference}', method="GET")
-        payment_status = payment_data.get('status')
-
-        if payment_status == 'pending':
-            self._set_pending()
-        elif payment_status == 'authorized':
-            self._set_authorized()
-        elif payment_status == 'paid':
-            self._set_done()
-        elif payment_status in ['expired', 'canceled', 'failed']:
-            self._set_canceled("Multisafe: " + _("Canceled payment with status: %s", payment_status))
-        else:
-            _logger.info(
-                "received data with invalid payment status (%s) for transaction with reference %s",
-                payment_status, self.reference
-            )
-            self._set_error(
-                "Multisafe: " + _("Received data with invalid payment status: %s", payment_status)
-            )
-
+        self._set_done()
