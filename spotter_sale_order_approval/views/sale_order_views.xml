@@ -13,7 +13,7 @@
                        position="after">
                     <button name="action_approve" string="Approve 1"
                             type="object"
-                            states="draft"/>
+                            attrs="{'invisible':[('amt_greater','!=',True)"/>
 
                     <button name="action_approve_2" string="Approve 2"
                             type="object"
