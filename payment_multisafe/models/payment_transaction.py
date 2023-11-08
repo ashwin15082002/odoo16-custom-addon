@@ -20,7 +20,6 @@ class PaymentTransaction(models.Model):
         """ Override of payment to return Multisafe Pay-specific rendering values. """
 
         res = super()._get_specific_rendering_values(processing_values)
-        _logger.error("\n hellooooo")
 
         if self.provider_code != 'multisafe':
             return res

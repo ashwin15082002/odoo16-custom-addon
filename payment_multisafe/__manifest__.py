@@ -3,11 +3,13 @@
 {
     'name': "Multisafe Pay",
     'version': '16.0.4.0.0',
-    'depends': ['payment','website'],
+    'depends': ['payment', 'website'],
     'author': "Ashwin",
     'category': 'Category',
     'description': """   """,
-    'website': 'https://testapi.multisafepay.com/',
+    'installable': True,
+    'application': True,
+    'license': 'LGPL-3',
     # data files always loaded at installation
     'data': [
         # 'views/payment_provider_form.xml',
