@@ -17,6 +17,7 @@ class SoApproval(models.Model):
 
     @api.depends('amount_total')
     def _compute_amounts(self):
+        """ supering the function and getting the value of total amount """
         super()._compute_amounts()
         amount = self.amount_total
         self.price_flag = True if amount > 25000 else False
