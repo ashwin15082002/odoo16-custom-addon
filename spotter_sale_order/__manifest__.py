@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "Spotter Sale Order Approval",
+    'name': "Spotter Sale Order",
     'version': '16.0.4.0.0',
     'depends': ['sale'],
     'author': "Ashwin",
