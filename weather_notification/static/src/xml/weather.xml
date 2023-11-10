@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="systray_icon" owl="1">
+        <div class="new_icon">
+            <div class="icon_div">
+                <div class="toggle-icon" role="button">
+                    <i id='create_order' t-on-click="_onClick"
+                       class="fa fa-cloud fa-1.5x"
+                       style="color: white; margin-bottom:10px; padding:13px;"
+                       role="img"
+                       data-bs-toggle="modal"
+                       data-bs-target="#weather"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="weather">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Weather Updates</h5>
+
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </t>
+</templates>

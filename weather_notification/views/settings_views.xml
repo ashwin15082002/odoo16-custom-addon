@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="weather_setting_form_inherit" model="ir.ui.view">
+        <field name="name">weather.setting.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id"
+               ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='performance']"
+                   position="after">
+
+                <div class="row mt16 o_settings_container">
+                    <span class="o_form_label">Weather API Key</span>
+                    <div class="text-muted">
+                        Enter the API key here
+                    </div>
+                    <div class="content-group mt16">
+                        <div>
+                            <label string="API Key" for="weather_api_key"
+                                   class="col-lg-3 o_light_label"/>
+                            <field name="weather_api_key"/>
+                        </div>
+                        <div>
+                            <label string="Location" for="weather_api_key"
+                                   class="col-lg-3 o_light_label"/>
+                            <field name="location"/>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
