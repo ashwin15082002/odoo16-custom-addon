@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import fields, models, api
 
 
@@ -31,4 +33,3 @@ class SoApproval(models.Model):
     def button_approve_2(self):
         self.state = 'approved'
         self.price_flag = False
-
