@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_stock_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="text-center">
+                        <h3>Stock Report</h3>
+                    </div>
+                    <br/>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th name="th_product">
+                                    <span>Product</span>
+                                </th>
+                                <th name="th_price">
+                                    <span>Price</span>
+                                </th>
+                                <th name="th_quantity">
+                                    <span>Quantity</span>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="report" t-as="line">
+                                <tr>
+                                    <td class="text-center">
+                                        <t t-esc="line['name']['en_US']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['list_price']"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <t t-esc="line['quantity']"/>
+                                    </td>
+
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
