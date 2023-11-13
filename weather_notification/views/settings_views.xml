@@ -7,28 +7,30 @@
         <field name="inherit_id"
                ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='performance']"
+            <xpath expr="//div[@id='partner_autocomplete']"
                    position="after">
 
-                <div class="row mt16 o_settings_container">
-                    <span class="o_form_label">Weather API Key</span>
-                    <div class="text-muted">
-                        Enter the API key here
+                <div class="col-xs-12 col-md-6 o_setting_box"
+                     id="weather_api">
+                    <div class="o_setting_left_pane">
+                        <field name="is_module_weather"/>
                     </div>
-                    <div class="content-group mt16">
+                    <div class="o_setting_right_pane">
+                        <label for="is_module_weather"/>
+                        <div class="text-muted">
+                            Enter Weather API Key
+                        </div>
                         <div>
                             <label string="API Key" for="weather_api_key"
                                    class="col-lg-3 o_light_label"/>
-                            <field name="weather_api_key"/>
+                            <field name="weather_api_key" password="True"/>
                         </div>
                         <div>
-                            <label string="Location" for="weather_api_key"
+                            <label string="City" for="city"
                                    class="col-lg-3 o_light_label"/>
-                            <field name="location"/>
+                            <field name="city"/>
                         </div>
-
                     </div>
-
                 </div>
 
             </xpath>

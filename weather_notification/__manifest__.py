@@ -3,7 +3,7 @@
 {
     'name': "Weather Notification",
     'version': '16.0.4.0.0',
-    'depends': ['web'],
+    'depends': ['website'],
     'author': "Ashwin",
     'category': 'category',
     'description': """  """,
@@ -17,7 +17,7 @@
     'assets': {
         'web.assets_backend': [
             '/weather_notification/static/src/xml/weather.xml',
-            'weather_notification/static/src/js/weather_notification.js',
+            '/weather_notification/static/src/js/weather_notification.js',
         ],
     }
 

@@ -6,16 +6,24 @@ from odoo import models, fields, api
 class WeatherSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
+    is_module_weather = fields.Boolean(string='Weather API',
+                                       config_parameter='weather.is_module_weather')
+
     weather_api_key = fields.Char(string='API Key',
                                   help='paste the api key here.',
-                                  config_parameter='weather_notification.weather_api_key',
-                                  store=True)
+                                  config_parameter='weather.weather_api_key')
 
-    location = fields.Char(string='Location',
-                           config_parameter='weather_notification.location',
-                           store=True)
+    city = fields.Char(string='city',
+                       config_parameter='weather.city')
 
-    def custom_method(self):
-        print('hiii')
-        location= self.env['res.config.settings'].location
-        print(location)
+    @api.model
+    def custom(self):
+
+        return {
+            'api_key': self.env['ir.config_parameter'].sudo().get_param(
+                'weather.weather_api_key'),
+            'city': self.env['ir.config_parameter'].sudo().get_param(
+                'weather.city'),
+            'is_active': self.env['ir.config_parameter'].sudo().get_param(
+                'weather.is_module_weather'),
+        }

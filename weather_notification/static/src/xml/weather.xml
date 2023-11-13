@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="systray_icon" owl="1">
-        <div class="new_icon">
+        <div class="new_icon" >
             <div class="icon_div">
-                <div class="toggle-icon" role="button">
+                <div class="toggle-icon" role="button" >
                     <i id='create_order' t-on-click="_onClick"
                        class="fa fa-cloud fa-1.5x"
                        style="color: white; margin-bottom:10px; padding:13px;"
@@ -19,14 +19,30 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" >Weather Updates</h5>
+                        <h5 class="modal-title">Weather Updates</h5>
 
                     </div>
-                    <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-
-
+                    <div class="modal-body" id="body" display="flex">
+                        <div style="float:left">
+                            <h2><span id="loc"/></h2>
+                            <br/>
+                            <p><b>Day </b>
+                                <span id="max"/>K
+                                <i class="fa fa-arrow-up" aria-hidden="true"/></p>
+                            <p><b> Night  </b>
+                                <span id="min"/>K
+                                <i class="fa fa-arrow-down" aria-hidden="true"/>
+                            </p>
+                            <h2><span id="temp"/>K
+                                <span id="type"/></h2>
+                            <p><b><span id="weather_type"/></b></p>
+                        </div>
+                        <div style="float:right">
+                            <img src="weather_notification/static/src/img/clouds.jpg"
+                                 height="150" width="150"/>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
