@@ -7,7 +7,7 @@ class SystrayIcon extends Component{
     async setup() {
     this.state = useState({
       is_option_enabled: false,
-      values: {},
+
     });
 
     var setting = await rpc.query({
@@ -17,40 +17,42 @@ class SystrayIcon extends Component{
       console.log(setting)
       this.api_key = setting['api_key']
       this.city = setting['city']
-      this.is_active = setting['is_active']
+      this.state.is_option_enabled = setting['is_active']
 
     }
 
-    _onClick(ev) {
-            console.log(ev)
+    onClick(ev) {
+        console.log(ev)
 
-            if (this.city && this.api_key){
+        if (ev.city && ev.api_key){
 
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.city}&appid=${this.api_key}`)
-                .then(response => response.json())
-                .then(function(data) {
-                     var datas = data
-                     console.log(datas)
-                     ev_values(datas)
-                })
-            }
-            else{
-                $('#body').text('')
-                alert('Provide API Key and City')
-            }
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${ev.city}&appid=${ev.api_key}`)
+            .then(response => response.json())
+            .then(function(data) {
+                 var datas = data
+                 console.log(datas)
+                 ev_values(datas)
+
+            })
+        }
+        else{
+            $('#body').empty()
+            alert('Provide API Key and City')
+        }
         function ev_values(data){
             console.log('function called')
-
             if (data['cod']==401){
-                $('#body').text('')
+                $('#body').empty()
                 alert('Provide correct API Key')
 
             }
             else if(data['cod']==404){
-                $('#body').text('')
+                $('#body').empty()
                 alert('Please provide Correct City')
             }
             else{
+
+                var icon = data['weather'][0]['icon']
 
                 $('#loc').text(data['name'])
                 $('#max').text(data['main']['temp_max'])
@@ -60,9 +62,9 @@ class SystrayIcon extends Component{
                 $('#weather_type').text(data['weather'][0]['description'])
 
             }
+            ev.state.icon = icon
 
         }
-
     }
 }
 SystrayIcon.template = "systray_icon";

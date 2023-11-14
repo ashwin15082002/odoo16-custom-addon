@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="systray_icon" owl="1">
-        <div class="new_icon" >
-            <div class="icon_div">
-                <div class="toggle-icon" role="button" >
-                    <i id='create_order' t-on-click="_onClick"
-                       class="fa fa-cloud fa-1.5x"
-                       style="color: white; margin-bottom:10px; padding:13px;"
-                       role="img"
-                       data-bs-toggle="modal"
-                       data-bs-target="#weather"
-                    />
+
+        <t t-if="this.state.is_option_enabled">
+            <div class="new_icon">
+                <div class="icon_div">
+                    <div class="toggle-icon" role="button">
+                        <i id='create_order' t-on-click="() => onClick(this)"
+                           class="fa fa-cloud fa-1.5x"
+                           style="color: white; margin-bottom:10px; padding:13px;"
+                           role="img"
+                           data-bs-toggle="modal"
+                           data-bs-target="#weather"
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </t>
+        <t t-log="this.state"/>
 
         <div class="modal" tabindex="-1" role="dialog" id="weather">
             <div class="modal-dialog" role="document">
@@ -35,10 +39,10 @@
                             </p>
                             <h2><span id="temp"/>K
                                 <span id="type"/></h2>
-                            <p><b><span id="weather_type"/></b></p>
+                            <h4><span id="weather_type"/></h4>
                         </div>
-                        <div style="float:right">
-                            <img src="weather_notification/static/src/img/clouds.jpg"
+                        <div style="float:right; border-style: solid;">
+                            <img t-attf-src="https://openweathermap.org/img/wn/{{this.state.icon}}@2x.png"
                                  height="150" width="150"/>
                         </div>
                     </div>

@@ -19,13 +19,13 @@
                         <label for="is_module_weather"/>
                         <div class="text-muted">
                             Enter Weather API Key
-                        </div>
-                        <div>
+                        </div><br/>
+                        <div attrs="{'invisible':[('is_module_weather','=',False)]}">
                             <label string="API Key" for="weather_api_key"
                                    class="col-lg-3 o_light_label"/>
                             <field name="weather_api_key" password="True"/>
                         </div>
-                        <div>
+                        <div attrs="{'invisible':[('is_module_weather','=',False)]}">
                             <label string="City" for="city"
                                    class="col-lg-3 o_light_label"/>
                             <field name="city"/>
