@@ -28,7 +28,3 @@ class WeatherSettings(models.TransientModel):
                 'weather.is_module_weather'),
         }
 
-    @api.onchange('is_module_weather')
-    def onchange_is_module_weather(self):
-        self.weather_api_key = None
-        self.city = None

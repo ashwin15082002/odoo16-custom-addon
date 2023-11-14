@@ -4,22 +4,29 @@ const { Component,useState} = owl
 const rpc = require('web.rpc')
 
 class SystrayIcon extends Component{
+
     async setup() {
-    this.state = useState({
-      is_option_enabled: false,
+
+        this.state = useState({
+        is_option_enabled: false,
 
     });
 
     var setting = await rpc.query({
         model: "res.config.settings",
         method: "custom",
-      });
-      console.log(setting)
-      this.api_key = setting['api_key']
-      this.city = setting['city']
-      this.state.is_option_enabled = setting['is_active']
+        });
+        console.log(setting)
+        this.api_key = setting['api_key']
+        this.city = setting['city']
+        this.state.is_option_enabled = setting['is_active']
+        fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${this.city}&apiKey=2fef58d064e5431c88fbb8c2e4a59e09`)
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
 
     }
+
 
     onClick(ev) {
         console.log(ev)
@@ -32,7 +39,6 @@ class SystrayIcon extends Component{
                  var datas = data
                  console.log(datas)
                  ev_values(datas)
-
             })
         }
         else{
@@ -66,6 +72,7 @@ class SystrayIcon extends Component{
 
         }
     }
+
 }
 SystrayIcon.template = "systray_icon";
 const systrayItem = { Component: SystrayIcon, };

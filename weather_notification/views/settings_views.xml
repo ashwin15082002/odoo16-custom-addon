@@ -28,7 +28,7 @@
                         <div attrs="{'invisible':[('is_module_weather','=',False)]}">
                             <label string="City" for="city"
                                    class="col-lg-3 o_light_label"/>
-                            <field name="city"/>
+                            <field name="city" t-on-change="someMethod"/>
                         </div>
                     </div>
                 </div>
@@ -37,3 +37,4 @@
         </field>
     </record>
 </odoo>
+
