@@ -7,6 +7,7 @@ class WeatherSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     is_module_weather = fields.Boolean(string='Weather API',
+                                       help='Turn On for showing the icon',
                                        config_parameter='weather.is_module_weather')
 
     weather_api_key = fields.Char(string='API Key',
@@ -14,7 +15,8 @@ class WeatherSettings(models.TransientModel):
                                   config_parameter='weather.weather_api_key')
 
     city = fields.Char(string='city',
-                       config_parameter='weather.city')
+                       help='mention the city here',
+                       config_parameter='weather.city',)
 
     @api.model
     def custom(self):

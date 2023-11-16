@@ -10,6 +10,7 @@
             <xpath expr="//div[@id='partner_autocomplete']"
                    position="after">
 
+
                 <div class="col-xs-12 col-md-6 o_setting_box"
                      id="weather_api">
                     <div class="o_setting_left_pane">
@@ -28,7 +29,7 @@
                         <div attrs="{'invisible':[('is_module_weather','=',False)]}">
                             <label string="City" for="city"
                                    class="col-lg-3 o_light_label"/>
-                            <field name="city" t-on-change="someMethod"/>
+                            <field name="city" id="city"/>
                         </div>
                     </div>
                 </div>

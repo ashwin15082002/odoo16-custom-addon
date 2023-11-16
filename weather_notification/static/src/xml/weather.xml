@@ -24,23 +24,26 @@
                         <h5 class="modal-title">Weather Updates</h5>
 
                     </div>
-                    <div class="modal-body" id="body" display="flex">
+                    <div class="modal-body" id="body" display="flex" t-if="this.state.dict">
                         <div style="float:left">
-                            <h2><span id="loc"/></h2>
+                            <h2><span id="loc" t-esc="this.state.dict.name"/></h2>
                             <br/>
                             <p><b>Day </b>
-                                <span id="max"/>K
+                                <span id="max"
+                                      t-esc="this.state.dict.temp_max"/>K
                                 <i class="fa fa-arrow-up" aria-hidden="true"/></p>
                             <p><b> Night  </b>
-                                <span id="min"/>K
+                                <span id="min"
+                                      t-esc="this.state.dict.temp_min"/>K
                                 <i class="fa fa-arrow-down" aria-hidden="true"/>
                             </p>
-                            <h2><span id="temp"/>K
-                                <span id="type"/></h2>
-                            <h4><span id="weather_type"/></h4>
+                            <h2><span id="temp" t-esc="this.state.dict.feels_like"/>
+                                K
+                                <span id="type" t-esc="this.state.dict.type"/></h2>
+                            <h4><span id="weather_type" t-esc="this.state.dict.weather_type"/></h4>
                         </div>
                         <div style="float:right; border-style: solid;">
-                            <img t-attf-src="https://openweathermap.org/img/wn/{{this.state.icon}}@2x.png"
+                            <img t-attf-src="https://openweathermap.org/img/wn/{{this.state.dict.icon}}@2x.png"
                                  height="150" width="150"/>
                         </div>
                     </div>
