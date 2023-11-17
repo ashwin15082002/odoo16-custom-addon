@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!--         Scheduled action for daily stock report -->
+        <record id="ir_cron_scheduler_recurring_action" model="ir.cron">
+            <field name="name">Hp Brand</field>
+            <field name="model_id" ref="model_product_template"/>
+            <field name="state">code</field>
+            <field name="code">model.hp_brand()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="nextcall"
+                   eval="(DateTime.now())"/>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

@@ -16,11 +16,10 @@ class WeatherSettings(models.TransientModel):
 
     city = fields.Char(string='city',
                        help='mention the city here',
-                       config_parameter='weather.city',)
+                       config_parameter='weather.city', )
 
     @api.model
     def custom(self):
-
         return {
             'api_key': self.env['ir.config_parameter'].sudo().get_param(
                 'weather.weather_api_key'),
@@ -29,4 +28,3 @@ class WeatherSettings(models.TransientModel):
             'is_active': self.env['ir.config_parameter'].sudo().get_param(
                 'weather.is_module_weather'),
         }
-
