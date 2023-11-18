@@ -12,7 +12,6 @@
 
     # data files always loaded at installation
     'data':[
-        'data/demo.xml',
         'views/res_partner_views.xml',
     ]
 

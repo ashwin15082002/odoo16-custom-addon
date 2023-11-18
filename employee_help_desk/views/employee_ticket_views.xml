@@ -4,10 +4,11 @@
         <field name="name">employee.ticket.tree</field>
         <field name="model">employee.ticket</field>
         <field name="arch" type="xml">
-            <tree string="Employee Ticket">
+            <tree string="Employee Ticket" create="false">
 
                 <field name="employee_id"/>
                 <field name="subject"/>
+                <field name="state"/>
 
             </tree>
         </field>
@@ -18,12 +19,19 @@
         <field name="model">employee.ticket</field>
         <field name="arch" type="xml">
             <form string="warranty">
+                <header>
+                    <button string="Approve" name="button_approve" type="object"
+                            class="oe_highlight" states="waiting" groups="hr.group_hr_manager"/>
+                    <field name="state" widget="statusbar"/>
+
+                </header>
 
                 <sheet>
                     <group>
 
                         <field name="employee_id" readonly="1"/>
                         <field name="subject" readonly="1"/>
+                        <field name="team"/>
 
                     </group>
                 </sheet>

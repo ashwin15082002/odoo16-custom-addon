@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <a t-attf-href="/helpdesk" class="btn btn-primary btn-lg">Go
+                    <a t-attf-href="/helpdesk" class="btn btn-primary">Go
                         Back
                     </a>
                 </div>
