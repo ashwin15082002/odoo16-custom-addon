@@ -3,7 +3,7 @@
 {
     'name': "Employee Help Desk",
     'version': '16.0.1.0.0',
-    'depends': ['base', 'website','hr'],
+    'depends': ['base','website','hr'],
     'author': "Ashwin",
     'category': 'category',
     'description': """  """,

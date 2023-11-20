@@ -9,37 +9,46 @@
                 <form class="form" method="post" id="employee_ticket_form"
                       action="/create/ticket">
                     <div class="row">
-                        <div class="col">
+                        <span>
                             <label for="employee_ids">
                                 Name
                             </label>
-<!--                            <input class="form-control"-->
-<!--                                   required="1">-->
-<!--                                    <t t-esc="request.env.user.name"/>-->
-<!--                            </input>-->
-                            <select id="employee_ids" name="employee"
-                                    class="form-control">
-                                <t t-foreach="employee_ids" t-as="employee">
-                                    <option t-att-value="employee.id">
-                                        <t t-esc="employee.name"/>
-                                    </option>
-                                </t>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <label for="subject">
-                                Subject
-                            </label>
+                        </span>
 
-                            <input name="subject"
-                                   class="form-control"
-                                   required="1"
-                                   id="subject"
-                                   rows="3"
-                                    placeholder='Whats your Problem'>
-                            </input>
-                        </div>
+                        <select id="employee_ids" name="employee"
+                                class="form-control">
+                            <t t-foreach="employee_ids" t-as="employee">
+                                <option t-att-value="employee.id">
+                                    <t t-esc="employee.name"/>
+                                </option>
+                            </t>
+                        </select>
                     </div>
+                    <div class="row">
+                        <label for="category">
+                            Category
+                        </label>
+                        <select class="form-control" name="category" required="1">
+                            <option>Technical</option>
+                            <option>Personal</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <label for="description">
+                            Description
+                        </label>
+
+                        <input name="description"
+                               class="form-control"
+                               required="1"
+                               id="description"
+                               rows="3"
+                               placeholder='Whats your Problem'>
+                        </input>
+                    </div>
+
 
                     <div class="form-group" style="margin-top:10px"
                          align="center">
@@ -52,7 +61,7 @@
             </div>
         </t>
     </template>
-<!--    success template    -->
+    <!--    success template    -->
     <template id="employee_ticket_success_template" name="Success">
         <t t-call="website.layout">
             <div class="container">

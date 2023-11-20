@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
+    <record id="restrict_employee" model="ir.rule">
+        <field name="name">Restrict Employee</field>
+        <field name="model_id" ref="employee_help_desk.model_employee_ticket"/>
+        <field name="domain_force">[('employee_manager_id.user_id.id', '=',
+            user.id)]
+        </field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
     <record id="ticket_tree_view" model="ir.ui.view">
         <field name="name">employee.ticket.tree</field>
         <field name="model">employee.ticket</field>
@@ -7,7 +16,8 @@
             <tree string="Employee Ticket" create="false">
 
                 <field name="employee_id"/>
-                <field name="subject"/>
+                <field name="date"/>
+                <field name="category"/>
                 <field name="state"/>
 
             </tree>
@@ -21,17 +31,25 @@
             <form string="warranty">
                 <header>
                     <button string="Approve" name="button_approve" type="object"
-                            class="oe_highlight" states="waiting" groups="hr.group_hr_manager"/>
+                            class="oe_highlight" states="waiting"/>
                     <field name="state" widget="statusbar"/>
 
                 </header>
 
                 <sheet>
                     <group>
+                        <group>
+                            <field name="employee_id" readonly="1"/>
+                            <field name="email"/>
+                            <field name="date"/>
+                            <field name="description" readonly="1"/>
 
-                        <field name="employee_id" readonly="1"/>
-                        <field name="subject" readonly="1"/>
-                        <field name="team"/>
+                        </group>
+                        <group>
+                            <field name="employee_manager_id"/>
+                            <field name="department"/>
+                            <field name="category"/>
+                        </group>
 
                     </group>
                 </sheet>
