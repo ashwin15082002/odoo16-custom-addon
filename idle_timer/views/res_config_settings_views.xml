@@ -14,7 +14,7 @@
                     <div class="o_setting_right_pane" id="livechat_right_pane">
                         <span class="o_form_label">IDLE TIMER FOR SURVEY</span>
                         <div class="text-muted">
-                            Set timer for idle in Seconds.
+                            Set idle timer in Seconds.
                         </div>
                         <div>
                             <label for="idle_timer">Idle Timer</label>
@@ -22,7 +22,6 @@
                         </div>
                     </div>
                 </div>
-
             </xpath>
         </field>
     </record>
