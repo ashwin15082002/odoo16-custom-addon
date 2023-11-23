@@ -17,31 +17,27 @@ odoo.define('idle_timer.custom_time', function (require) {
            currentSec = time;
         })
         let begin_in = 5;
-        setInterval(startIdleTimer,1000);
+        var idle = setInterval(startIdleTimer,1000);
 
         window.onmousemove = ResetTimer;
         window.onclick = ResetTimer;
         window.onkeydown = ResetTimer;
 
-
         function ResetTimer(){
             currentSec = time;
             begin_in = 5
-            $('#timer').text('');
+            $('#timer').empty();
         }
 
         function startIdleTimer(){
             begin_in--;
             if (begin_in <=0 && currentSec > 0){
                 currentSec--;
-                var element = $('o_survey_form')
-                var elem = element.find('.btn-primary')
-                if(elem){
-                    console.log('hihii')
+
+                var element = $('.o_survey_review')
+                if(! element['length']){
+                    $('#timer').text(currentSec);
                 }
-
-                $('#timer').text(currentSec);
-
                 if (currentSec == 0){
                     $('.btn-primary').click();
                 }

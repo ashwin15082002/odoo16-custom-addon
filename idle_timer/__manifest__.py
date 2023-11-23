@@ -3,10 +3,13 @@
 {
     'name': "Idle Timer",
     'version': '16.0.1.0.0',
-    'depends': ['base','website','survey'],
+    'depends': ['base', 'survey'],
     'author': "Ashwin",
     'category': 'category',
-    'description': """  """,
+    'description': """ Set an idle timer for the quiz,
+                        If mouse and keyboard are idle for a particular time,  timer should start 
+                        After a particular time it should move to next page.
+                        Note:  Set the required timings in the configuration . """,
     'installable': True,
     'application': False,
     'license': 'LGPL-3',
@@ -20,5 +23,4 @@
             '/idle_timer/static/src/js/idle_timer.js',
         ]
     },
-
 }

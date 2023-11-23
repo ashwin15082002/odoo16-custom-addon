@@ -7,5 +7,6 @@ class IdleSetting(models.TransientModel):
     _inherit = 'res.config.settings'
 
     idle_timer = fields.Integer(string='Idle Timer',
-                                config_parameter='idle_timer.idle_timer')
+                                config_parameter='idle_timer.idle_timer',
+                                help='Enter the idle time in seconds.')
 
