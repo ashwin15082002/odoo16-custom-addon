@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="fetch_po_menu_root" name="Fetch PO"
+              parent="purchase.menu_purchase_root" action="fetch_po_action" sequence="101"/>
+</odoo>
+
+

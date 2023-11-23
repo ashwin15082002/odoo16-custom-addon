@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+     <!--    wizard view-->
+    <record id="fetch_po_view_form" model="ir.ui.view">
+        <field name="name">fetch.po.wizard.form</field>
+        <field name="model">fetch.po.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fetch PO Wizard">
+                <group>
+                    <group string="ODOO 15">
+                        <field name="odoo15_db"/>
+                        <field name="odoo15_ur"/>
+                        <field name="odoo15_pwd"/>
+                        <field name="port_15"/>
+                    </group>
+                    <group string="ODOO 16">
+                        <field name="odoo16_db"/>
+                        <field name="odoo16_ur"/>
+                        <field name="odoo16_pwd"/>
+                        <field name="port_16"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="fetch" class="oe_highlight"
+                            string="Fetch" type="object"/>
+
+                    <button string="Cancel" class="btn-danger" special="cancel"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <!--    wizard action-->
+
+    <record id="fetch_po_action" model="ir.actions.act_window">
+        <field name="name">Fetch PO</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">fetch.po.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="fetch_po_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
+
