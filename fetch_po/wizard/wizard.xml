@@ -15,8 +15,6 @@
                         <field name="port_15"/>
                     </group>
                     <group string="ODOO 16">
-                        <field name="odoo16_db"/>
-                        <field name="odoo16_ur"/>
                         <field name="odoo16_pwd"/>
                         <field name="port_16"/>
                     </group>

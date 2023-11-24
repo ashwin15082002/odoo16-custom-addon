@@ -6,7 +6,7 @@
     'depends': ['base', 'purchase'],
     'author': "Ashwin",
     'category': 'category',
-    'description': """ . """,
+    'description': """  """,
     'installable': True,
     'application': False,
     'license': 'LGPL-3',
@@ -14,9 +14,7 @@
     'data': [
         'security/ir.model.access.csv',
         'wizard/wizard.xml',
-
         'views/purchase_views.xml',
-
     ],
 
 }
