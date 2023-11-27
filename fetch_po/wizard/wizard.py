@@ -66,14 +66,12 @@ class ReportWizard(models.TransientModel):
                                                'res.partner', 'search_read', [],
                                                {'fields': ['name',
                                                            'email']})
-
             #  -------------------------products--------------------------------
 
             products_15 = models_15.execute_kw(self.odoo15_db, uid_15,
                                                self.odoo15_pwd,
                                                'product.product',
                                                'search_read', [])
-            print(products_15)
 
             products_16 = self.env['product.product'].search([]).mapped('name')
             for product in products_15:
@@ -112,19 +110,47 @@ class ReportWizard(models.TransientModel):
                 if i['name'] not in orders_in_16:
                     for j in contacts_16:
                         if j['name'] == i['partner_id'][1]:
-                            contact_id = j['id']
+                            partner_id = j['id']
                             models_16.execute_kw(odoo16_db, uid_16,
                                                  self.odoo16_pwd,
                                                  'purchase.order', 'create',
                                                  [{'name': i['name'],
-                                                   'partner_id': contact_id,
+                                                   'partner_id': partner_id,
                                                    'amount_total': i[
                                                        'amount_total'],
                                                    'date_order': i[
                                                        'date_order'],
                                                    'state': i['state'],
-                                                   'date_planned': i['date_planned'],
+                                                   'date_planned': i[
+                                                       'date_planned'],
                                                    }])
+
+            #  ---------------------purchase order line-------------------------
+
+            order_line_in_15 = models_15.execute_kw(self.odoo15_db, uid_15,
+                                                    self.odoo15_pwd,
+                                                    'purchase.order.line',
+                                                    'search_read', [], [])
+            orders_in_16 = self.env['purchase.order'].search_read([])
+            print(orders_in_16)
+            products_in_16 = self.env['product.product'].search_read([])
+
+            for line in order_line_in_15:
+                for order in orders_in_16:
+                    for product in products_in_16:
+                        if line['product_id'][1] == product['name'] and line['order_id'][1] == order['name']:
+                            models_16.execute_kw(odoo16_db, uid_16,
+                                                 self.odoo16_pwd,
+                                                 'purchase.order.line', 'create',
+                                                 [{'name': order['name'],
+                                                   'product_qty': line['product_qty'],
+                                                   'product_id': product['id'],
+                                                   'price_unit': line['price_unit'],
+                                                   'price_subtotal': line['price_subtotal'],
+                                                   'order_id': order['id'],
+                                                   }])
+
+            print(self.env['purchase.order.line'].search_read([]))
 
         except:
             raise models.ValidationError("Error !!.")
