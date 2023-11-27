@@ -41,58 +41,90 @@ class ReportWizard(models.TransientModel):
         except:
             raise models.ValidationError(
                 "Connection to the Database failed!! \nEnter Valid details.")
+        try:
 
-        records = models_15.execute_kw(self.odoo15_db, uid_15,
-                                       self.odoo15_pwd, 'purchase.order',
-                                       'search_read', [], {
-                                           'fields': ['name',
-                                                      'partner_id',
-                                                      'product_id',
-                                                      'order_line',
-                                                      'amount_total',
-                                                      'date_order',
-                                                      'state']})
+            #  -------------------------contacts--------------------------------
 
-        contacts_15 = models_15.execute_kw(self.odoo15_db, uid_15,
-                                           self.odoo15_pwd,
-                                           'res.partner', 'search_read', [],
-                                           {'fields': ['id', 'name',
-                                                       'email']})
-        print('contacts_15==', contacts_15)
+            contacts_15 = models_15.execute_kw(self.odoo15_db, uid_15,
+                                               self.odoo15_pwd,
+                                               'res.partner', 'search_read', [],
+                                               {'fields': ['name',
+                                                           'email']})
+            print('contacts_15==', contacts_15)
+            contacts_in_16 = self.env['res.partner'].search([]).mapped('name')
+            print(contacts_in_16)
 
-        contacts_16 = models_16.execute_kw(odoo16_db, uid_16,
-                                           self.odoo16_pwd,
-                                           'res.partner', 'search_read', [],
-                                           {'fields': ['id', 'name',
-                                                       'email']})
-        print('contacts_16==', contacts_16)
-        contacts = []
-        for cont16 in contacts_16:
             for cont15 in contacts_15:
-                if cont15['name'] != cont16['name']:
-                    print('already exist')
-                    contacts.append({'name': cont15['name'],
-                                     'email': cont15['email']})
-        result = list(
-            {
-                dictionary['name']: dictionary
-                for dictionary in contacts
-            }.values()
-        )
-        print(result)
-
-        for j in contacts_16:
-            for i in records:
-                if j['name'] == i['partner_id'][1]:
-                    contact_id = j['id']
+                if cont15['name'] not in contacts_in_16:
                     models_16.execute_kw(odoo16_db, uid_16,
                                          self.odoo16_pwd,
-                                         'purchase.order', 'create',
-                                         [{'name': i['name'],
-                                           'partner_id': contact_id,
-                                           'product_id': i['product_id'][0],
-                                           'amount_total': i[
-                                               'amount_total'],
-                                           'date_order': i['date_order'],
-                                           'state': i['state'],
+                                         'res.partner',
+                                         'create', [{'name': cont15['name'],
+                                                     'email': cont15['email']}])
+            contacts_16 = models_16.execute_kw(odoo16_db, uid_16,
+                                               self.odoo16_pwd,
+                                               'res.partner', 'search_read', [],
+                                               {'fields': ['name',
+                                                           'email']})
+
+            #  -------------------------products--------------------------------
+
+            products_15 = models_15.execute_kw(self.odoo15_db, uid_15,
+                                               self.odoo15_pwd,
+                                               'product.product',
+                                               'search_read', [])
+            print(products_15)
+
+            products_16 = self.env['product.product'].search([]).mapped('name')
+            for product in products_15:
+                if product['name'] not in products_16:
+                    models_16.execute_kw(odoo16_db, uid_16,
+                                         self.odoo16_pwd,
+                                         'product.product', 'create',
+                                         [{'name': product['name'],
+                                           'list_price': product['list_price'],
+                                           'standard_price': product[
+                                               'standard_price'],
+                                           'lst_price': product['lst_price'],
+                                           'default_code': product[
+                                               'default_code'],
+                                           'detailed_type': product[
+                                               'detailed_type'],
+                                           'image_1920': product['image_1920'],
                                            }])
+
+            #  ----------------------purchase order-----------------------------
+
+            records = models_15.execute_kw(self.odoo15_db, uid_15,
+                                           self.odoo15_pwd, 'purchase.order',
+                                           'search_read', [], {
+                                               'fields': ['name',
+                                                          'partner_id',
+                                                          'product_id',
+                                                          'order_line',
+                                                          'amount_total',
+                                                          'date_order',
+                                                          'date_planned',
+                                                          'state']})
+
+            orders_in_16 = self.env['purchase.order'].search([]).mapped('name')
+            for i in records:
+                if i['name'] not in orders_in_16:
+                    for j in contacts_16:
+                        if j['name'] == i['partner_id'][1]:
+                            contact_id = j['id']
+                            models_16.execute_kw(odoo16_db, uid_16,
+                                                 self.odoo16_pwd,
+                                                 'purchase.order', 'create',
+                                                 [{'name': i['name'],
+                                                   'partner_id': contact_id,
+                                                   'amount_total': i[
+                                                       'amount_total'],
+                                                   'date_order': i[
+                                                       'date_order'],
+                                                   'state': i['state'],
+                                                   'date_planned': i['date_planned'],
+                                                   }])
+
+        except:
+            raise models.ValidationError("Error !!.")
