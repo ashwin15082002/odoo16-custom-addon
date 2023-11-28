@@ -16,5 +16,4 @@
         'wizard/wizard.xml',
         'views/purchase_views.xml',
     ],
-
 }

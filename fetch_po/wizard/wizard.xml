@@ -13,10 +13,12 @@
                         <field name="odoo15_ur"/>
                         <field name="odoo15_pwd"/>
                         <field name="port_15"/>
+                        <field name="odoo_url_15" placeholder="http://localhost name"/>
                     </group>
                     <group string="ODOO 16">
                         <field name="odoo16_pwd"/>
                         <field name="port_16"/>
+                        <field name="odoo_url_16" placeholder="http://localhost name"/>
                     </group>
                 </group>
 
