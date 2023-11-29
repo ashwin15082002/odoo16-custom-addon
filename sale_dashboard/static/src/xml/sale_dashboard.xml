@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="OwlSalesDashboard" owl="1">
+        <div class="vh-100 overflow-auto bg-muted">
+            <div class="row m-3">
+                <div class="col-lg-13">
+                    <div class="row">
+                        <div class="col m-0 p-0">
+                            <div class="shadow-sm border m-2 p-4 bg-white"
+                                 style="border-radius: 15px 50px">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h1 class="text-primary fw-bold">Sales Dashboard</h1>
+                                    <div>
+                                        <select class="form-select" t-model="state.period" t-on-change="onPeriodChange">
+                                            <option value="0">Select Period</option>
+                                            <option value="7">Last 7 Days</option>
+                                            <option value="30">Last 30 Days</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-5">
+                <div class="col-lg-2">
+                    <div class="shadow-sm border m-2 text-center"
+                         style="background-color:#80bdff; border-radius: 25px">
+                        <div class="h1 fw-bold text-dark"
+                             style="font-size: 48px"><t t-esc="state.quotations.value"/></div>
+                        <div class="h3 text-muted">Quotations</div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="shadow-sm border m-2 text-center"
+                         style="background-color:#b58cf5; border-radius: 25px">
+                        <div class="h1 fw-bold text-dark"
+                             style="font-size: 48px"><t t-esc="state.order.value"/></div>
+                        <div class="h3 text-muted">Orders</div>
+
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="shadow-sm border m-2 text-center"
+                         style="background-color:#f5b48c; border-radius: 25px">
+                        <div class="h1 fw-bold text-dark"
+                             style="font-size: 48px">10</div>
+                        <div class="h3 text-muted">Revenues</div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="shadow-sm border m-2 text-center"
+                         style="background-color:#8cf5ec; border-radius: 25px">
+                        <div class="h1 fw-bold text-dark"
+                             style="font-size: 48px">10</div>
+                        <div class="h3 text-muted">Average Order</div>
+                    </div>
+                </div>
+            </div>
+
+            <!--++++++++++++++++++++++++++   Sales Person   +++++++++++++++++++++++++++++-->
+
+            <div class="row m-5">
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Sales Person</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'line'" title="'Sales Person'"/>
+
+                    </div>
+                </div>
+
+                <!--++++++++++++++++++++++++++   Sales Team   +++++++++++++++++++++++++++++++-->
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Sales Team</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'bar'" title="'Sales Team'"/>
+                    </div>
+                </div>
+            </div>
+
+            <!--+++++++++++++++++++++++++   Top 10 customers   ++++++++++++++++++++++++++-->
+
+            <div class="row m-5">
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Top 10 customers</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'doughnut'" title="'Top 10 Customers'"/>
+
+                    </div>
+                </div>
+
+                <!--++++++++++++++++++++++   Lowest selling products   ++++++++++++++++++++++-->
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Lowest selling products</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'pie'" title="'Lowest Selling Products'"/>
+
+                    </div>
+                </div>
+
+                <!--++++++++++++++++++++++   Highest selling products   +++++++++++++++++++++-->
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Highest selling products</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'doughnut'" title="'Highest Selling Products'"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-5">
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Order Status</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'bar'" title="'Order Status'"/>
+                    </div>
+                </div>
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Invoice Status</h3>
+                            <div class="px-3 py-1 bg-primary cursor-pointer">
+                                <span class="fa fa-arrow-right text-white"/>
+                            </div>
+                        </div>
+                        <ChartRendered type="'bar'" title="'Invoice Status'"/>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </t>
+</templates>
