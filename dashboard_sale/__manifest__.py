@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "Sale Dashboard",
+    'name': "Dashboard Sale",
     'version': '16.0.1.0.0',
     'depends': ['base','web', 'sale','board'],
     'author': "Ashwin",
@@ -17,10 +17,8 @@
     'assets':{
         'web.assets_backend':[
             'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js',
-            'sale_dashboard/static/src/xml/sale_dashboard.xml',
-            'sale_dashboard/static/src/xml/chart_rendered.xml',
-            'sale_dashboard/static/src/js/sale_dashboard.js',
-            'sale_dashboard/static/src/js/chart_rendered.js',
+            'dashboard_sale/static/src/xml/dashboard_sale.xml',
+            'dashboard_sale/static/src/js/dashboard_sale.js',
 
         ]
     }

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="OwlSalesDashboard" owl="1">
-        <div class="vh-100 overflow-auto bg-muted">
+        <div class="vh-100 overflow-auto bg-muted"
+             style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);">
             <div class="row m-3">
                 <div class="col-lg-13">
                     <div class="row">
                         <div class="col m-0 p-0">
                             <div class="shadow-sm border m-2 p-4 bg-white"
-                                 style="border-radius: 15px 50px">
+                                 style="border-radius: 25px">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h1 class="text-primary fw-bold">Sales Dashboard</h1>
                                     <div>
-                                        <select class="form-select" t-model="state.period" t-on-change="onPeriodChange">
-                                            <option value="0">Select Period</option>
+                                        <select class="form-select" t-model="state.period"
+                                                t-on-change="onPeriodChange">
                                             <option value="7">Last 7 Days</option>
                                             <option value="30">Last 30 Days</option>
                                         </select>
@@ -25,11 +26,12 @@
             </div>
 
             <div class="row m-5">
+                <div class="col-lg-2"/>
                 <div class="col-lg-2">
                     <div class="shadow-sm border m-2 text-center"
                          style="background-color:#80bdff; border-radius: 25px">
                         <div class="h1 fw-bold text-dark"
-                             style="font-size: 48px"><t t-esc="state.quotations.value"/></div>
+                             style="font-size: 48px"><t t-esc="state.data.quotations"/></div>
                         <div class="h3 text-muted">Quotations</div>
                     </div>
                 </div>
@@ -37,7 +39,7 @@
                     <div class="shadow-sm border m-2 text-center"
                          style="background-color:#b58cf5; border-radius: 25px">
                         <div class="h1 fw-bold text-dark"
-                             style="font-size: 48px"><t t-esc="state.order.value"/></div>
+                             style="font-size: 48px"><t t-esc="state.data.orders"/> </div>
                         <div class="h3 text-muted">Orders</div>
 
                     </div>
@@ -46,7 +48,7 @@
                     <div class="shadow-sm border m-2 text-center"
                          style="background-color:#f5b48c; border-radius: 25px">
                         <div class="h1 fw-bold text-dark"
-                             style="font-size: 48px">10</div>
+                             style="font-size: 48px">$<t t-esc="state.data.revenue"/></div>
                         <div class="h3 text-muted">Revenues</div>
                     </div>
                 </div>
@@ -54,12 +56,13 @@
                     <div class="shadow-sm border m-2 text-center"
                          style="background-color:#8cf5ec; border-radius: 25px">
                         <div class="h1 fw-bold text-dark"
-                             style="font-size: 48px">10</div>
+                             style="font-size: 48px">$<t t-esc="state.data.avg_order"/></div>
                         <div class="h3 text-muted">Average Order</div>
                     </div>
                 </div>
-            </div>
+                <div class="col-lg-2"/>
 
+            </div>
             <!--++++++++++++++++++++++++++   Sales Person   +++++++++++++++++++++++++++++-->
 
             <div class="row m-5">
@@ -72,7 +75,7 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'line'" title="'Sales Person'"/>
+                        <canvas t-ref="SalesPerson"/>
 
                     </div>
                 </div>
@@ -88,7 +91,8 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'bar'" title="'Sales Team'"/>
+                        <canvas t-ref="SalesTeam"/>
+
                     </div>
                 </div>
             </div>
@@ -105,7 +109,7 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'doughnut'" title="'Top 10 Customers'"/>
+                        <canvas t-ref="TopCustomers"/>
 
                     </div>
                 </div>
@@ -121,7 +125,7 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'pie'" title="'Lowest Selling Products'"/>
+                        <canvas t-ref="LowProducts"/>
 
                     </div>
                 </div>
@@ -137,7 +141,7 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'doughnut'" title="'Highest Selling Products'"/>
+                        <canvas t-ref="HighProducts"/>
                     </div>
                 </div>
             </div>
@@ -152,7 +156,7 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'bar'" title="'Order Status'"/>
+                        <canvas t-ref="OrderStatus"/>
                     </div>
                 </div>
                 <div class="col m-0 p-0">
@@ -164,12 +168,10 @@
                                 <span class="fa fa-arrow-right text-white"/>
                             </div>
                         </div>
-                        <ChartRendered type="'bar'" title="'Invoice Status'"/>
+                        <canvas t-ref="InvoiceStatus"/>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </t>
 </templates>
