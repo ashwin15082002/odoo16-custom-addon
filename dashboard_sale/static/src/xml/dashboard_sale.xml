@@ -63,7 +63,7 @@
                 <div class="col-lg-2"/>
 
             </div>
-            <!--++++++++++++++++++++++++++   Sales Person   +++++++++++++++++++++++++++++-->
+<!--++++++++++++++++++++++++++   Sales Person   +++++++++++++++++++++++++++++-->
 
             <div class="row m-5">
                 <div class="col m-0 p-0">
@@ -71,25 +71,19 @@
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Sales Person</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="SalesPerson"/>
 
                     </div>
                 </div>
 
-                <!--++++++++++++++++++++++++++   Sales Team   +++++++++++++++++++++++++++++++-->
+<!--++++++++++++++++++++++++++   Sales Team   +++++++++++++++++++++++++++++++-->
 
                 <div class="col m-0 p-0">
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Sales Team</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="SalesTeam"/>
 
@@ -97,7 +91,7 @@
                 </div>
             </div>
 
-            <!--+++++++++++++++++++++++++   Top 10 customers   ++++++++++++++++++++++++++-->
+<!--+++++++++++++++++++++++++   Top 10 customers   ++++++++++++++++++++++++++-->
 
             <div class="row m-5">
                 <div class="col m-0 p-0">
@@ -105,41 +99,32 @@
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Top 10 customers</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="TopCustomers"/>
 
                     </div>
                 </div>
 
-                <!--++++++++++++++++++++++   Lowest selling products   ++++++++++++++++++++++-->
+<!--++++++++++++++++++++++   Lowest selling products   ++++++++++++++++++++++-->
 
                 <div class="col m-0 p-0">
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Lowest selling products</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="LowProducts"/>
 
                     </div>
                 </div>
 
-                <!--++++++++++++++++++++++   Highest selling products   +++++++++++++++++++++-->
+<!--++++++++++++++++++++++   Highest selling products   +++++++++++++++++++++-->
 
                 <div class="col m-0 p-0">
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Highest selling products</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="HighProducts"/>
                     </div>
@@ -152,9 +137,6 @@
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Order Status</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="OrderStatus"/>
                     </div>
@@ -164,9 +146,6 @@
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
                             <h3 class="text-primary fw-bold">Invoice Status</h3>
-                            <div class="px-3 py-1 bg-primary cursor-pointer">
-                                <span class="fa fa-arrow-right text-white"/>
-                            </div>
                         </div>
                         <canvas t-ref="InvoiceStatus"/>
                     </div>

@@ -15,25 +15,22 @@ class SaleDashboard(models.Model):
         end_date = Date.today()
         if date_count == '30':
             start_date = end_date - timedelta(days=30)
-            res = self.get_data(start_date, end_date)
+            res = self.get_data(start_date)
             return res
         else:
             start_date = end_date - timedelta(days=7)
-            res = self.get_data(start_date, end_date)
+            res = self.get_data(start_date)
             return res
 
-    def get_data(self, start_date, end_date):
+    def get_data(self, start_date):
         sale_order = self.env['sale.order'].search(
             [('date_order', '>', start_date)])
-        print(sale_order)
         quotations = len(
             sale_order.filtered(lambda quot: quot.state in ['draft', 'sent']))
         orders = sale_order.filtered(lambda quot: quot.state in ['sale'])
         revenue = round(sum(orders.mapped('amount_total')))
         average_order = round(
             ((sum(orders.mapped('amount_total'))) / len(orders)))
-        # print(self.env['sale.order'].search_read([], limit=1))
-        print(self.env['sale.order.line'].search_read([], limit=1))
 
 # ------------------------- chart for sales person -----------------------------
 
@@ -50,7 +47,8 @@ class SaleDashboard(models.Model):
         team = [team.name for team in sales_teams]
         data_sales_team = []
         for teams in sales_teams:
-            data_sales_team.append(len(sale_order.filtered(lambda data: data.team_id == teams)))
+            data_sales_team.append(
+                len(sale_order.filtered(lambda data: data.team_id == teams)))
 
 # ------------------------ chart for top 10 customer ---------------------------
 
@@ -67,12 +65,66 @@ class SaleDashboard(models.Model):
             partner_name.append(items['name'])
             count_records.append(items['count'])
 
-# ------------------------ chart for lowest products ---------------------------
+# -------------------------- chart for products --------------------------------
 
         order_line = sale_order.order_line
-        print([product.product_id for product in order_line])
+        products = []
+        for product in order_line:
+            products.append(product.product_id.id)
+        product_detail = []
+        for product_id in list(set(products)):
+            product_count = len(sale_order.order_line.filtered(
+                lambda top: top.product_id.id == product_id))
+            product_detail.append(
+                {'name': self.env['product.product'].browse(product_id).name,
+                 'count': product_count})
+        #  chart for top products
 
+        top_product = sorted(product_detail, key=itemgetter('count'),
+                             reverse=True)
+        top_product_name = []
+        top_product_count = []
+        for items in top_product[:8]:
+            top_product_name.append(items['name'])
+            top_product_count.append(items['count'])
 
+        # chart for low products
+        low_product = sorted(product_detail, key=itemgetter('count'))
+        low_product_name = []
+        low_product_count = []
+        for items in low_product[:6]:
+            low_product_name.append(items['name'])
+            low_product_count.append(items['count'])
+
+# ----------------------- chart for order status -------------------------------
+
+        order_status = sale_order.mapped('state')
+        order_state = []
+        for status in set(order_status):
+            order_state.append({'name': status,
+                                'count': len(sale_order.filtered(
+                                    lambda st: st.state == status))})
+        state_name = []
+        state_count = []
+        for items in order_state:
+            state_name.append(items['name'])
+            state_count.append(items['count'])
+
+# ----------------------- chart for invoice status -------------------------------
+
+        invoice_status = orders.mapped('invoice_status')
+        invoice_state = []
+        for state in set(invoice_status):
+            invoice_state.append({'name': state,
+                                  'count': len(orders.filtered(
+                                      lambda st: st.invoice_status == state))})
+        invoice_state_name = []
+        invoice_state_count = []
+        for items in invoice_state:
+            invoice_state_name.append(items['name'])
+            invoice_state_count.append(items['count'])
+
+# --------------------------- passing values -----------------------------------
 
         records = {
             'quotations': quotations,
@@ -88,5 +140,18 @@ class SaleDashboard(models.Model):
 
             'partner_name': partner_name,
             'count_records': count_records,
+
+            'top_product': top_product_name,
+            'top_count': top_product_count,
+
+            'low_product': low_product_name,
+            'low_count': low_product_count,
+
+            'state_name': state_name,
+            'state_count': state_count,
+
+            'invoice_state_name': invoice_state_name,
+            'invoice_state_count': invoice_state_count,
+
         }
         return records
