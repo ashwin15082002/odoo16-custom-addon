@@ -111,7 +111,7 @@
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="text-primary fw-bold">Lowest selling products</h3>
+                            <h3 class="text-primary fw-bold">Lowest Selling products</h3>
                         </div>
                         <canvas t-ref="LowProducts"/>
 
@@ -124,7 +124,7 @@
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h3 class="text-primary fw-bold">Highest selling products</h3>
+                            <h3 class="text-primary fw-bold">Highest Selling products</h3>
                         </div>
                         <canvas t-ref="HighProducts"/>
                     </div>
