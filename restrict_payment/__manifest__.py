@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': "company customer",
+    'name': "Restrict Payment",
     'version': '16.0.1.0.0',
-    'depends': ['base'],
+    'depends': ['base','website','account'],
     'author': "Ashwin",
-    'category': 'Category',
+    'category': 'category',
     'description': """  """,
     'installable': True,
-    'application': True,
-
+    'application': False,
+    'license': 'LGPL-3',
     # data files always loaded at installation
-    'data':[
+    'data': [
         'views/res_partner_views.xml',
-    ]
-
+    ],
 }
