@@ -132,7 +132,8 @@
             </div>
 
             <div class="row m-5">
-                <div class="col m-0 p-0">
+                <div class="col-lg-1 m-0 p-0"/>
+                <div class="col-lg-5 m-0 p-0">
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">
@@ -141,7 +142,7 @@
                         <canvas t-ref="OrderStatus"/>
                     </div>
                 </div>
-                <div class="col m-0 p-0">
+                <div class="col-lg-5 m-0 p-0">
                     <div class="shadow-sm border m-2 p-4 bg-white"
                          style="border-radius: 15px">
                         <div class="d-flex align-items-center justify-content-between">

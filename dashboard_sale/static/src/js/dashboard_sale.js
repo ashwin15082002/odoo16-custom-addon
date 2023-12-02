@@ -42,10 +42,10 @@ export class OwlSalesDashboard extends Component {
         this.charts(this.SalesPerson.el,'bar',this.state.data.sales_person,'Sales Person',this.state.data.data_sales_person)
         this.charts(this.SalesTeam.el,'line',this.state.data.team,'Sales Team', this.state.data.data_sales_team)
         this.charts(this.TopCustomers.el,'pie',this.state.data.partner_name,'Top Customers', this.state.data.count_records)
-        this.charts(this.LowProducts.el,'doughnut',this.state.data.low_product,'Low Products', this.state.data.low_count)
+        this.charts(this.LowProducts.el,'doughnut',this.state.data.low_product,'Sale Order Count', this.state.data.low_count)
         this.charts(this.HighProducts.el,'pie',this.state.data.top_product,'Top Products', this.state.data.top_count)
-        this.charts(this.OrderStatus.el,'bar',this.state.data.state_name,'Order Status', this.state.data.state_count)
-        this.charts(this.InvoiceStatus.el,'line',this.state.data.invoice_state_name,'Invoice Status', this.state.data.invoice_state_count)
+        this.charts(this.OrderStatus.el,'polarArea',this.state.data.state_name,'Order Status', this.state.data.state_count)
+        this.charts(this.InvoiceStatus.el,'radar',this.state.data.invoice_state_name,'Invoice Status', this.state.data.invoice_state_count)
 
     }
 
