@@ -1,4 +1,4 @@
 !.gitignore
 !.github
 !.mailmap
-.zip
+*.zip
