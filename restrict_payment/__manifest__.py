@@ -12,6 +12,6 @@
     'license': 'LGPL-3',
     # data files always loaded at installation
     'data': [
-        'views/res_partner_views.xml',
+        'views/payment_provider_views.xml',
     ],
 }
