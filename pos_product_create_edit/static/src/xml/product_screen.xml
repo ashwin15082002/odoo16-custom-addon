@@ -41,7 +41,7 @@
                                                     <td><t t-esc="product.default_code"/></td>
                                                     <td><t t-esc="product.pos_categ_id[1]"/></td>
                                                     <td><t t-esc="product.lst_price"/></td>
-                                                    <td><div style="color: #017e84" t-on-click="">
+                                                    <td><div style="color: #017e84" t-on-click="()=>this.trigger('click_editProduct',{ details: product.id })">
                                                         <i class="fa fa-pencil"/></div></td>
                                                 </tr>
                                             </t>
