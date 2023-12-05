@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="create_product" xml:space="preserve">
+    <t t-name="CreateProduct" owl="1">
+        <div class="popup" id="create_product">
+            <header class="title drag-handle">
+                <div>CREATE PRODUCT</div>
+            </header>
+            <main class="body">
+                <div class="row">
+                    <div class="image">
+                        <label for="name">Image : </label>
+                        <input type="file" name="image" t-model="state.product_image"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="name">
+                        <label for="name">Name : </label>
+                        <input type="text" name="name" t-model="state.product_name"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="price">
+                        <label for="price">Price : </label>
+                        <input type="number" name="price" t-model="state.product_price"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="cost">
+                        <label for="cost">Cost : </label>
+                        <input type="number" name="cost" t-model="state.product_cost" />
+                    </div>
+                </div>
+                <br/>
+                <div class="select">
+                    <div>
+                        <label for="category">Category : </label>
+                        <select class="form-select" name="categ" t-model="state.product_categ">
+                            <t t-foreach="props.category" t-as="categ" t-key="categ.id">
+                                    <option t-att-value="categ.id">
+                                        <t t-esc="categ.name"/>
+                                    </option>
+                                </t>
+                        </select>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer">
+                <div class="button confirm" t-on-click="confirm">
+                    Create
+                </div>
+                <div class="button cancel" t-on-click="cancel">
+                    Back
+                </div>
+            </footer>
+        </div>
+    </t>
+
+</templates>
