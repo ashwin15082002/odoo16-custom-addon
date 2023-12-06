@@ -1,55 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <templates id="create_product" xml:space="preserve">
-    <t t-name="CreateProduct" owl="1">
+    <t t-name="CreateProduct" owl="1"><t t-log="props"/>
         <div class="popup" id="create_product">
             <header class="title drag-handle">
-                <div>CREATE PRODUCT</div>
+                <div t-if="props.product">EDIT PRODUCT</div>
+                <div t-else="">CREATE PRODUCT</div>
             </header>
             <main class="body">
                 <div class="row">
+
                     <div class="image">
-                        <label for="name">Image : </label>
-                        <input type="file" name="image" t-model="state.product_image"/>
+                        <div t-if="props.product">
+                            <div>
+                                <img t-attf-src="data:image/png;base64,{{props.product['0']['image_1920']}}"
+                                     height="80px" width="80px"/>
+                            </div>
+                            <div>
+                                <label for="name">Image : </label>
+                                <input type="file" name="image_1920"
+                                       class="image-uploader"
+                                       t-ref="editImage"
+                                       t-on-change="uploadImage"/>
+                            </div>
+                        </div>
+                        <div t-else="">
+                            <label for="name">Image : </label>
+
+                            <!--<input type="file" name="image" class="image-uploader" t-if="props.product" t-ref="editImage" t-on-change="uploadImage"/>-->
+                            <input type="file" name="image"
+                                   class="image-uploader"
+                                   t-on-change="uploadImage"/>
+                        </div>
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="name">
                         <label for="name">Name : </label>
-                        <input type="text" name="name" t-model="state.product_name"/>
+                        <input type="text" name="name"
+                               t-attf-value="{{props.product['0']['name']}}"
+                               t-if="props.product" t-ref="editName"
+                               t-on-input="updateData"/>
+                        <input type="text" name="name"
+                               t-model="state.create_data.product_name"
+                               t-else=""/>
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="price">
                         <label for="price">Price : </label>
-                        <input type="number" name="price" t-model="state.product_price"/>
+                        <input type="number" name="lst_price"
+                               t-attf-value="{{props.product['0']['lst_price']}}"
+                               t-if="props.product" t-ref="editPrice"
+                               t-on-input="updateData"/>
+                        <input type="number" name="price"
+                               t-model="state.create_data.product_price"
+                               t-else=""/>
                     </div>
                 </div>
                 <br/>
-                <div class="row">
+                <div class="row" t-if="!props.product">
                     <div class="cost">
                         <label for="cost">Cost : </label>
-                        <input type="number" name="cost" t-model="state.product_cost" />
+                        <input type="number" name="cost"
+                               t-model="state.create_data.product_cost"/>
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div>
                         <label for="category">Category : </label>
-                        <select class="form-select" name="categ" t-model="state.product_categ">
-                            <t t-foreach="props.category" t-as="categ" t-key="categ.id">
-                                    <option t-att-value="categ.id">
-                                        <t t-esc="categ.name"/>
-                                    </option>
-                                </t>
+                        <select name="pos_categ_id"
+                                t-model="state.product_categ"
+                                t-if="props.product" t-ref="editCateg"
+                                t-on-input="updateData">
+                            <t t-foreach="props.category" t-as="categ"
+                               t-key="categ.id">
+                                <option t-att-value="categ.id"
+                                        t-att-selected="categ.id == props.product[0]['pos_categ_id'][0]">
+                                    <t t-esc="categ.name"/>
+                                </option>
+                            </t>
                         </select>
+                        <select name="categ"
+                                t-model="state.create_data.product_categ"
+                                t-else="">
+                            <t t-foreach="props.category" t-as="categ"
+                               t-key="categ.id">
+                                <option t-att-value="categ.id">
+                                    <t t-esc="categ.name"/>
+                                </option>
+                            </t>
+                        </select>
+
                     </div>
                 </div>
             </main>
             <footer class="footer">
-                <div class="button confirm" t-on-click="confirm">
+                <div class="button confirm" t-on-click="edit"
+                     t-if="props.product">
+                    Edit
+                </div>
+                <div class="button confirm" t-on-click="confirm" t-else="">
                     Create
                 </div>
                 <div class="button cancel" t-on-click="cancel">

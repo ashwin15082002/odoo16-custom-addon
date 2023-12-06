@@ -2,11 +2,9 @@ odoo.define('pos_button.Custom', function(require) {
 'use strict';
     const { Gui } = require('point_of_sale.Gui');
     const PosComponent = require('point_of_sale.PosComponent');
-    const { identifyError } = require('point_of_sale.utils');
     const ProductScreen = require('point_of_sale.ProductScreen');
     const { useListener } = require("@web/core/utils/hooks");
     const Registries = require('point_of_sale.Registries');
-    const PaymentScreen = require('point_of_sale.PaymentScreen');
 
     class ProductButton extends PosComponent {
         setup() {
