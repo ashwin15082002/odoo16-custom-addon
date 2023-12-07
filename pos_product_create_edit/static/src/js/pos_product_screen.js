@@ -9,17 +9,42 @@ odoo.define('pos_product_create_edit.CategoryScreen', function(require) {
     var rpc = require('web.rpc');
     var core = require('web.core');
 
-    const { useState } = owl;
+    const { useState, useRef } = owl;
     class CategoryScreen extends PosComponent {
         setup(){
             super.setup();
+            this.state = useState({
+                searchWord:null,
+                product_list : this.env.pos.db.product_by_id,
+            });
+            this.searchWordInputRef = useRef('search-word-input-product');
 
             useListener('click_createProduct', this.onClick);
             useListener('click_editProduct', this.editClick);
+
         }
         back() {
+        console.log(this.env.pos)
+            this.env.pos.db.product_by_id = this.state.product_list;
             this.showScreen('ProductScreen');
         }
+
+        async updateSearch(event){
+            this.state.searchWord = event.target.value;
+            var self = this;
+
+            this.env.pos.db.product_by_id = await this.rpc({
+                model: 'product.product',
+                method: 'search_read',
+                domain: [['available_in_pos', '=', true],
+                        ['name', 'ilike', this.state.searchWord]],
+                fields: ['name','default_code','pos_categ_id','lst_price'],
+                })
+
+            self.showScreen('CategoryScreen', {
+                products: this.env.pos.db.product_by_id,})
+        }
+
         async onClick() {
             var self = this;
             const category = await this.rpc({

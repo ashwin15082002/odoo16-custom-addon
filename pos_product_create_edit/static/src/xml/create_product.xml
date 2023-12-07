@@ -14,7 +14,10 @@
                         <div t-if="props.product">
                             <div>
                                 <img t-attf-src="data:image/png;base64,{{props.product['0']['image_1920']}}"
-                                     height="80px" width="80px"/>
+                                 height="80px" width="80px"/>
+
+                                <img t-if="this.state.image" t-attf-src="data:image/png;base64,{{this.state.image}}"
+                                 height="80px" width="80px"/>
                             </div>
                             <div>
                                 <label for="name">Image : </label>
@@ -25,9 +28,11 @@
                             </div>
                         </div>
                         <div t-else="">
+                            <div t-if="this.state.image">
+                                <img t-attf-src="data:image/png;base64,{{this.state.image}}"
+                                     height="80px" width="80px"/>
+                            </div>
                             <label for="name">Image : </label>
-
-                            <!--<input type="file" name="image" class="image-uploader" t-if="props.product" t-ref="editImage" t-on-change="uploadImage"/>-->
                             <input type="file" name="image"
                                    class="image-uploader"
                                    t-on-change="uploadImage"/>
@@ -73,7 +78,7 @@
                     <div>
                         <label for="category">Category : </label>
                         <select name="pos_categ_id"
-                                t-model="state.product_categ"
+                                class="form-control"
                                 t-if="props.product" t-ref="editCateg"
                                 t-on-input="updateData">
                             <t t-foreach="props.category" t-as="categ"
@@ -85,6 +90,7 @@
                             </t>
                         </select>
                         <select name="categ"
+                                class="form-control"
                                 t-model="state.create_data.product_categ"
                                 t-else="">
                             <t t-foreach="props.category" t-as="categ"

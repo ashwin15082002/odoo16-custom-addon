@@ -14,13 +14,15 @@
                         <i class="fa fa-plus"/>
                         <span> Create</span>
                     </div>
-<!--                    <div class="search-bar-container sb-partner" t-if="!state.detailIsShown">-->
-<!--                        <div class="pos-search-bar">-->
-<!--                            <i class="fa fa-search" t-on-click="_onPressEnterKey"/>-->
-<!--                            <input t-ref="search-word-input-partner" placeholder="Search Customers..." size="1" t-on-keyup="updatePartnerList" />-->
-<!--                            <i class="fa fa-times" t-on-click="_clearSearch"/>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="search-bar-container sb-partner">
+                        <div class="pos-search-bar">
+                            <i class="fa fa-search"/>
+                            <input t-model="state.searchWord"
+                                   t-ref="search-word-input-product"
+                                   placeholder="Search Products..." type="text"
+                                   t-on-input="updateSearch"/>
+                        </div>
+                    </div>
                 </div>
                 <section class="full-content">
                     <div class="partner-window">
@@ -38,7 +40,7 @@
                                                 <th>Edit</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="partner-list-contents">
+                                        <tbody class="partner-list-contents"><t t-log="this.state"/>
                                             <t t-foreach="props.products"
                                                t-as="product"
                                                t-key="product.id">

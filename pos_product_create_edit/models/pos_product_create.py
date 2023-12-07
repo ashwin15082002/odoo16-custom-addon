@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import base64
 
 from odoo import models, api
 
@@ -20,12 +19,29 @@ class PosProductCreate(models.Model):
                 'available_in_pos': True,
                 'image_1920': img,
             })
+            # print(created_product)
+            # data = {'name': created_product.name,
+            #         'lst_price': created_product.lst_price,
+            #         'pos_categ_id': created_product.pos_categ_id.id,
+            #         'available_in_pos': created_product.available_in_pos,
+            #         'image_1920': created_product.image_1920,
+            #         }
+
             return created_product
 
     @api.model
     def edit_product(self, data, product_id, img):
-        data['image_1920'] = img
+
+        if img:
+            data['image_1920'] = img
+        print(data)
+
         if len(data) != 0:
+            if 'pos_categ_id' in data:
+                data['pos_categ_id'] = int(data['pos_categ_id'])
+
             product = self.env['product.product'].browse(product_id)
             product.update(data)
             return product
+        else:
+            return

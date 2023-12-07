@@ -24,9 +24,10 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
                 edit_data :{
                     }
             });
+
             this.editName = useRef('editName');
             this.editPrice = useRef('editPrice');
-            this.editName = useRef('editCateg');
+            this.editCateg = useRef('editCateg');
             this.editImage = useRef('editImage');
         }
         cancel(){
@@ -45,8 +46,8 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
             const imageUrl = getDataURLFromFile(file);
             console.log(imageUrl)
             const res = await this.processImage(imageUrl)
-
         }
+
         processImage(url){
             url.then((a)=>{
                 this.state.image = a.split(',')[1];

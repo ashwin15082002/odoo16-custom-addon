@@ -16,6 +16,7 @@
         'point_of_sale.assets':[
             'pos_product_create_edit/static/src/xml/*',
             'pos_product_create_edit/static/src/js/*',
+            'pos_product_create_edit/static/src/css/*',
         ],
     },
 
