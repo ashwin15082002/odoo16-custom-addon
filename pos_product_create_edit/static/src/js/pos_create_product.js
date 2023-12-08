@@ -55,13 +55,13 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
         }
 
         confirm(){
-            console.log(this.state)
             this.rpc({
                 model: 'pos.product.create',
                 method: 'custom',
                 args: [this.state.create_data,this.state.image],
                 }).then((result)=> {
                 if(result){
+                    this.load_server_data();
                     this.showScreen('ProductScreen');
                     this.env.posbus.trigger('close-popup', {
                         popupId: this.props.id,
@@ -73,8 +73,31 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
                     });
                 }
             });
+
         }
+
+        async load_server_data(){
+                const loadedData = await this.env.services.rpc({
+                    model: 'pos.session',
+                    method: 'load_pos_data',
+                    args: [[odoo.pos_session_id]],
+                });
+                await this.env.pos._loadProductProduct(loadedData['product.product']);
+                return this.env.pos.after_load_server_data();
+            }
+
         edit(){
+
+            if (this.state.edit_data['name']){
+                this.env.pos.db.product_by_id[this.props.product[0]['id']]['display_name'] = this.state.edit_data['name']
+            }
+            if (this.state.edit_data['lst_price']){
+                this.env.pos.db.product_by_id[this.props.product[0]['id']]['lst_price'] = this.state.edit_data['lst_price']
+            }
+            if (this.state.edit_data['pos_categ_id']){
+                this.env.pos.db.product_by_id[this.props.product[0]['id']]['pos_categ_id'][0] = this.state.edit_data['pos_categ_id']
+            }
+
             this.rpc({
                 model: 'pos.product.create',
                 method: 'edit_product',

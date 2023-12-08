@@ -19,13 +19,7 @@ class PosProductCreate(models.Model):
                 'available_in_pos': True,
                 'image_1920': img,
             })
-            # print(created_product)
-            # data = {'name': created_product.name,
-            #         'lst_price': created_product.lst_price,
-            #         'pos_categ_id': created_product.pos_categ_id.id,
-            #         'available_in_pos': created_product.available_in_pos,
-            #         'image_1920': created_product.image_1920,
-            #         }
+
 
             return created_product
 

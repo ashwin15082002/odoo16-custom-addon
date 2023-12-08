@@ -40,7 +40,7 @@
                                                 <th>Edit</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="partner-list-contents"><t t-log="this.state"/>
+                                        <tbody class="partner-list-contents">
                                             <t t-foreach="props.products"
                                                t-as="product"
                                                t-key="product.id">
