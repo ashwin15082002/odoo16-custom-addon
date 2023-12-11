@@ -4,14 +4,13 @@ from odoo import models, api
 
 
 class PosProductCreate(models.Model):
-    _name = 'pos.product.create'
+    _inherit = 'product.product'
 
     @api.model
-    def custom(self, data, img):
-        print(data)
+    def create_product(self, data, img):
         if (data['product_name'] and data['product_price'] and
                 data['product_cost'] and data['product_categ']):
-            created_product = self.env['product.product'].create({
+            created_product = self.create({
                 'name': data['product_name'],
                 'lst_price': data['product_price'],
                 'standard_price': data['product_cost'],
@@ -19,22 +18,18 @@ class PosProductCreate(models.Model):
                 'available_in_pos': True,
                 'image_1920': img,
             })
-
-
             return created_product
 
     @api.model
     def edit_product(self, data, product_id, img):
-
+        print(data)
         if img:
             data['image_1920'] = img
-        print(data)
-
         if len(data) != 0:
             if 'pos_categ_id' in data:
                 data['pos_categ_id'] = int(data['pos_categ_id'])
 
-            product = self.env['product.product'].browse(product_id)
+            product = self.browse(product_id)
             product.update(data)
             return product
         else:

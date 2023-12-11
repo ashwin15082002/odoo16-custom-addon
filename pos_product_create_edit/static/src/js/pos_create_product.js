@@ -51,13 +51,14 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
         processImage(url){
             url.then((a)=>{
                 this.state.image = a.split(',')[1];
+                this.state.storeImage = a.split(',')[1];
             });
         }
 
         confirm(){
             this.rpc({
-                model: 'pos.product.create',
-                method: 'custom',
+                model: 'product.product',
+                method: 'create_product',
                 args: [this.state.create_data,this.state.image],
                 }).then((result)=> {
                 if(result){
@@ -73,7 +74,6 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
                     });
                 }
             });
-
         }
 
         async load_server_data(){
@@ -87,7 +87,6 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
             }
 
         edit(){
-
             if (this.state.edit_data['name']){
                 this.env.pos.db.product_by_id[this.props.product[0]['id']]['display_name'] = this.state.edit_data['name']
             }
@@ -95,15 +94,14 @@ odoo.define('pos_product_create_edit.CreateProduct', function(require) {
                 this.env.pos.db.product_by_id[this.props.product[0]['id']]['lst_price'] = this.state.edit_data['lst_price']
             }
             if (this.state.edit_data['pos_categ_id']){
-                this.env.pos.db.product_by_id[this.props.product[0]['id']]['pos_categ_id'][0] = this.state.edit_data['pos_categ_id']
+                this.env.pos.db.product_by_id[this.props.product[0]['id']]['pos_categ_id'][0] = parseInt(this.state.edit_data['pos_categ_id'])
             }
 
             this.rpc({
-                model: 'pos.product.create',
+                model: 'product.product',
                 method: 'edit_product',
-                args: [this.state.edit_data,this.props.product[0]['id'],this.state.image ],
+                args: [this.state.edit_data,this.props.product[0]['id'],this.state.image],
                 }).then((data)=> {
-                console.log(data)
                 if(data){
                     this.showScreen('ProductScreen');
                     this.env.posbus.trigger('close-popup', {

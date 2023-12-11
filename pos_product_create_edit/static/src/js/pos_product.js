@@ -12,20 +12,13 @@ odoo.define('pos_button.Custom', function(require) {
             useListener('click', this.onClick);
         }
         async onClick() {
+            console.log(this.env.pos)
             var self = this;
-            await this.rpc({
-                model: 'product.product',
-                method: 'search_read',
-                domain: [['available_in_pos','=',true]],
-                fields: ['name','default_code','pos_categ_id','lst_price'],
-
-            }).then(function (result) {
+            var result = Object.values(this.env.pos.db.product_by_id)
                 self.showScreen('CategoryScreen', {
                     products: result,
                 });
-            });
         }
-
     }
     ProductButton.template = 'ProductButton';
     ProductScreen.addControlButton({component: ProductButton});

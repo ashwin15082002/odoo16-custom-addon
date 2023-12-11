@@ -24,7 +24,6 @@ odoo.define('pos_product_create_edit.CategoryScreen', function(require) {
 
         }
         back() {
-        console.log(this.env.pos)
             this.env.pos.db.product_by_id = this.state.product_list;
             this.showScreen('ProductScreen');
         }
@@ -38,7 +37,7 @@ odoo.define('pos_product_create_edit.CategoryScreen', function(require) {
                 method: 'search_read',
                 domain: [['available_in_pos', '=', true],
                         ['name', 'ilike', this.state.searchWord]],
-                fields: ['name','default_code','pos_categ_id','lst_price'],
+                fields: ['display_name','default_code','pos_categ_id','lst_price','image_1920'],
                 })
 
             self.showScreen('CategoryScreen', {
@@ -51,13 +50,12 @@ odoo.define('pos_product_create_edit.CategoryScreen', function(require) {
                 model: 'pos.category',
                 method: 'search_read',
                 fields: ['name'],
-
             })
             self.showPopup('CreateProduct', {
                 category,
             });
-
         }
+
         async editClick(details) {
             var self = this;
             const product = await this.rpc({

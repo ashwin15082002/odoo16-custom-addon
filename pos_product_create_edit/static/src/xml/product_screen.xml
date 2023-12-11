@@ -47,7 +47,7 @@
                                                 <tr>
                                                     <td><img t-attf-src="/web/image?model=product.product&amp;id={{ product.id }}&amp;field=image_128"
                                                              height="50px" width="50px"/></td>
-                                                    <td><t t-esc="product.name"/></td>
+                                                    <td><t t-esc="product.display_name"/></td>
                                                     <td><t t-esc="product.default_code"/></td>
                                                     <td><t t-esc="product.pos_categ_id[1]"/></td>
                                                     <td><t t-esc="product.lst_price"/></td>
