@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="template" name="product_return"
+              inherit_id="sale.sale_order_portal_content">
+        <xpath expr="//div[@id='introduction']/h2"
+               position="inside">
+            <span style="padding-left:400px">
+                <a class="btn btn-secondary o_download_btn" title="Return"
+                   data-bs-toggle="modal"
+                   data-bs-target=".bd-example-modal-xl">
+                    <i class="fa fa-truck" aria-hidden="true"/>
+                    Return
+                </a>
+            </span>
+
+            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            Sales Return
+                        </div>
+                        <div class="modal-body">
+                            <table class="table">
+                                <thead style="font-size:25px">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Return Quantity</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table table-striped" style="font-size:15px">
+                                    <t t-set="lines_to_report" t-value="sale_order._get_order_lines_to_report()"/>
+                                    <t t-foreach="lines_to_report" t-as="line">
+                                        <tr>
+                                            <td id="product_name">
+                                                <span t-field="line.name"/>
+                                            </td>
+                                            <td id="product_name">
+                                                <span t-field="line.product_uom_qty"/>
+                                            </td>
+                                            <td id="product_name">
+                                                <span t-field="line.product_uom"/>
+                                            </td>
+                                            <td id="product_name">
+                                                <textarea class="form-control" rows="2"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
