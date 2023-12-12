@@ -3,7 +3,7 @@
 {
     'name': "Multi Product Return",
     'version': '16.0.4.0.0',
-    'depends': ['sale','website'],
+    'depends': ['sale','website','stock'],
     'author': "Ashwin",
     'category': 'category',
     'description': """  """,
@@ -14,4 +14,10 @@
     'data': [
         'views/portal_views.xml',
     ],
+    'assets': {
+
+        'web.assets_frontend': [
+         'website_product_return/static/src/js/produt_return.js',
+        ]
+    },
 }

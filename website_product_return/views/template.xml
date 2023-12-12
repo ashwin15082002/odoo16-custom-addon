@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<odoo>
-    <template id="show_products" name="showPro">
-        <h2>error</h2>
-    </template>
-</odoo>
