@@ -28,11 +28,16 @@ odoo.define('website_product_return.return', function (require) {
 
         var val = []
         var order = []
+        var delivered_qty = []
         $("tr.order_line").each(function(){
-            order = $(this).find(".quantity").data("order-id"),
-            val.push({'product_id': $(this).find(".quantity").data("product-id"),
-                        'quantity': $(this).find(".quantity").val(),})
+            var el = $(this)
+            order = el.find(".quantity").data("order-id"),
+            delivered_qty.push({'delivered': el.find(".quantity").data("delivered_qty"),
+                                'line_id': el.find(".quantity").data("product-id"),})
+            val.push({'product_id': el.find(".quantity").data("product-id"),
+                      'quantity': el.find(".quantity").val(),})
         });
+        console.log(delivered_qty)
 
         this._rpc({
                 model: 'stock.picking',

@@ -9,6 +9,9 @@ class SaleReturn(models.Model):
     @api.model
     def create_picking(self, val, order_id):
         """ This functions help us to create stock picking and shown the picking in the delivery tab"""
+        print(val)
+        print(order_id)
+
         order = self.env['sale.order'].browse(order_id)
 
         transfer = self.env['stock.picking'].sudo().create({
@@ -30,4 +33,13 @@ class SaleReturn(models.Model):
         picking.append(transfer.id)
         order.picking_ids = picking
 
+        #==========================================================
 
+        # print(order.read())
+        # for pick in order.picking_ids:
+        #     if pick.picking_type_code == 'incoming':
+        #         for moves in pick.move_ids:
+        #             # print(moves.read())
+        #             product = moves.mapped('product_id')
+        #             print(moves.mapped('product_uom_qty'))
+        # return_orders =
