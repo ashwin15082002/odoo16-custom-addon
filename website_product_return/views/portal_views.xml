@@ -28,7 +28,6 @@
                                             <th>Product</th>
                                             <th>Quantity</th>
                                             <th>Return Quantity</th>
-                                            <th>Reason</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table table-striped"
@@ -39,10 +38,10 @@
                                            t-as="line">
                                             <tr class="order_line">
                                                 <td>
-                                                    <span t-field="line.name"/>
+                                                    <span  t-field="line.name"/>
                                                 </td>
                                                 <td>
-                                                    <span t-field="line.product_uom_qty"/>
+                                                    <span style="text-align: center;" t-field="line.product_uom_qty"/>
                                                 </td>
                                                 <td>
                                                     <div class="css_quantity input-group">
@@ -64,7 +63,7 @@
                                                                t-att-data-order-id="sale_order.id"
                                                                t-att-data-product-id="line.product_id.id"
                                                                t-att-data-delivered_qty="int(line.product_uom_qty)"
-                                                               t-att-value="1"
+                                                               t-att-value="int(line.product_uom_qty)"
                                                                readonly="1"/>
 
                                                         <div class="input-group-append">
@@ -77,11 +76,6 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <textarea
-                                                            class="form-control"
-                                                            placeholder="Reason"/>
-                                                </td>
                                             </tr>
                                         </t>
                                     </tbody>
@@ -89,10 +83,10 @@
 
                             </div>
                             <div class="modal-footer">
-                                <a id='create'
+                                <button id='create'
                                         class="btn btn-secondary">
                                     Submit
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -1,30 +1,33 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, api
+from odoo import api, models
 
 
 class SaleReturn(models.Model):
     _inherit = 'stock.picking'
 
     @api.model
-    def create_picking(self, kw):
-        print('helloooo', kw)
-        # for i in kw:
-        #     order = self.env['sale.order'].browse(i['order_id'])
-        #
-        #     picking = self.env['stock.picking'].create({
-        #         # 'name': order.name,
-        #         'picking_type_id': 1,
-        #         'location_id': order.partner_id[0].property_stock_customer.id,
-        #         'location_dest_id': 8,
-        #         'origin': order.name,
-        #         'move_ids': [(0, 0, {
-        #             'name': '/',
-        #             'product_id': i['product_id'],
-        #             'product_uom_qty': i['qty'],
-        #             'location_id': order.partner_id[0].property_stock_customer.id,
-        #             'location_dest_id': 8,
-        #         })],
-        #     })
-        #     print(picking)
-        #
+    def create_picking(self, val, order_id):
+        """ This functions help us to create stock picking and shown the picking in the delivery tab"""
+        order = self.env['sale.order'].browse(order_id)
+
+        transfer = self.env['stock.picking'].sudo().create({
+            'picking_type_id': 6,
+            'location_id': order.partner_id[0].property_stock_customer.id,
+            'location_dest_id': self.env.ref('stock.stock_location_stock').id,
+            'origin': order.name,
+        })
+        for i in val:
+            if i['quantity'] != '0':
+                transfer['move_ids'] = [(0, 0, {
+                    'name': order.name,
+                    'product_uom_qty': i['quantity'],
+                    'product_id': i['product_id'],
+                    "location_id": order.partner_id[0].property_stock_customer.id,
+                    "location_dest_id": self.env.ref('stock.stock_location_stock').id,
+                })]
+        picking = order.picking_ids.ids
+        picking.append(transfer.id)
+        order.picking_ids = picking
+
+

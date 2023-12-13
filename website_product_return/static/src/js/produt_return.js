@@ -25,39 +25,21 @@ odoo.define('website_product_return.return', function (require) {
     },
 
     _SubmitReturn: function(ev){
-        console.log('hiiiii')
+
         var val = []
-        var products = []
-        var qty = []
-        var order_id = $(this).find(".quantity").data("order-id")
+        var order = []
         $("tr.order_line").each(function(){
-            qty.push($(this).find(".quantity").val()),
-            products.push($(this).find(".quantity").data("product-id"))
+            order = $(this).find(".quantity").data("order-id"),
+            val.push({'product_id': $(this).find(".quantity").data("product-id"),
+                        'quantity': $(this).find(".quantity").val(),})
         });
-        val.push({'order_id': order_id,
-                  'products':products,
-                  'qty':qty,})
-        console.log(val)
+
         this._rpc({
                 model: 'stock.picking',
                 method: 'create_picking',
-                args: [val],
+                args: [val,order],
                 })
     }
 
     });
 });
-//receipt = self.env['stock.picking'].create({
-//            'picking_type_id': in_type.id,
-//            'location_id': customer_location.id,
-//            'location_dest_id': stock_location.id,
-//            'move_ids': [(0, 0, {
-//                'name': product.name,
-//                'product_id': product.id,
-//                'product_uom_qty': 1,
-//                'product_uom': product.uom_id.id,
-//                'location_id': customer_location.id,
-//                'location_dest_id': stock_location.id,
-//            })]
-//        })
-//        receipt.action_confirm()

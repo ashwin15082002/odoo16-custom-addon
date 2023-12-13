@@ -15,9 +15,8 @@
         'views/portal_views.xml',
     ],
     'assets': {
-
         'web.assets_frontend': [
-         'website_product_return/static/src/js/produt_return.js',
+            'website_product_return/static/src/js/produt_return.js',
         ]
     },
 }
