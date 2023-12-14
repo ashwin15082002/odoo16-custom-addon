@@ -1,15 +1,13 @@
 odoo.define('website_multi_product_return_management.return', function (require) {
     "use strict";
+
     var publicWidget = require('web.public.widget');
     var ajax = require('web.ajax');
-//    Modal hiding and showing in button click
+
     $("#hidden_box_btn").on('click', function () {
         $('#hidden_box').modal('show');
+
     })
-    $("#close-button").on('click', function () {
-        $('#hidden_box').modal('hide');
-    })
-//    Adding return quantity and it's details
     $(".js_add_json").on('click', function (ev) {
         var $link = $(ev.currentTarget);
         var $input = $link.closest('.input-group').find("input");
@@ -23,10 +21,11 @@ odoo.define('website_multi_product_return_management.return', function (require)
         }
         return false;
     })
-//    Form submit function
+
     $('#sale_return_form').on('submit', function(submission) {
         var val = []
         submission.preventDefault();
+
         $("tr.order_line").each(function() {
         var qty = parseFloat($(this).find(".quantity").val() || 0);
             if (qty !== 0){
@@ -38,11 +37,13 @@ odoo.define('website_multi_product_return_management.return', function (require)
                          'reason' : $(this).find("#return_reason").val()});
                 }
         });
+
         if (val.length !== 0){
             ajax.jsonRpc('/sale_return', 'call', {
                         'vals':val,
             }).then(function(result){
                 if (result == true){
+
                   window.location.href = '/my/request-thank-you';
 
                 }
@@ -56,4 +57,5 @@ odoo.define('website_multi_product_return_management.return', function (require)
             submission.preventDefault();
         }
     });
+
 });

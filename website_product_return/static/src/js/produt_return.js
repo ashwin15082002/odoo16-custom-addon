@@ -36,13 +36,18 @@ odoo.define('website_product_return.return', function (require) {
                                 'line_id': el.find(".quantity").data("product-id"),})
             val.push({'product_id': el.find(".quantity").data("product-id"),
                       'quantity': el.find(".quantity").val(),})
+
         });
-        console.log(delivered_qty)
 
         this._rpc({
                 model: 'stock.picking',
                 method: 'create_picking',
                 args: [val,order],
+                }).then(function(result){
+                    console.log(result)
+                    if (result){
+                        location.reload();
+                    }
                 })
     }
 
