@@ -22,25 +22,23 @@
                                            style="font-size:15px">
                                         <t t-set="lines_to_report"
                                            t-value="sale_order.picking_ids.move_ids.filtered(lambda x:x.product_id.type!='service' and x.picking_code == 'outgoing')"/>
-                                        <t t-esc="len(lines_to_report)"/>
 
                                         <t t-set="lines_to"
                                            t-value="sale_order.picking_ids.move_ids.filtered(lambda x:x.product_id.type!='service' and x.picking_code == 'incoming')"/>
-                                        <t t-esc="len(lines_to)"/>
 
-
+                                        <t t-set="total_maximum" t-value="0"/>
                                         <t t-foreach="lines_to_report"
                                            t-as="line">
                                             <t t-set="total_qty" t-value="0"/>
-                                            <t t-foreach="lines_to"
-                                               t-as="incoming">
+                                            <t t-foreach="lines_to" t-as="incoming">
                                                 <t t-if="line.product_id == incoming.product_id">
                                                     <t t-set="total_qty"
                                                        t-value="total_qty + incoming.product_uom_qty"/>
                                                 </t>
                                             </t>
-                                            <t t-esc="total_qty"/>
-                                            <tr class="order_line">
+                                            <t t-set="maximum" t-value="int(line.product_uom_qty) - int(total_qty)"/>
+                                            <t t-set="total_maximum" t-value="total_maximum + maximum"/>
+                                            <tr class="order_line" t-if="maximum != 0">
                                                 <td>
                                                     <span t-field="line.name"/>
                                                 </td>
@@ -58,17 +56,19 @@
                                                                 <i class="fa fa-minus"/>
                                                             </a>
                                                         </div>
+
                                                         <input type="text"
                                                                class="form-control quantity"
                                                                style="width: 50px;height: 50px;text-align: center;"
                                                                t-att-data-min="0"
-                                                               t-att-data-max="int(line.product_uom_qty) - int(total_qty)"
+                                                               t-att-data-max="maximum"
                                                                t-att-data-line-id="line.id"
                                                                t-att-data-order-id="sale_order.id"
                                                                t-att-data-product-id="line.product_id.id"
                                                                t-att-data-delivered_qty="int(line.product_uom_qty)"
-                                                               t-att-value="int(line.product_uom_qty) - int(total_qty)"
+                                                               t-att-value="maximum"
                                                                readonly="1"/>
+
                                                         <div class="input-group-append">
                                                             <a t-attf-href="#"
                                                                class="btn btn-link float_left d-none d-md-inline-block js_add_json"
@@ -96,7 +96,7 @@
 
             <span style="padding-left:400px">
                 <a class="btn btn-secondary o_download_btn" title="Return"
-                   t-if="len(lines_to_report) != 0"
+                   t-if="len(lines_to_report) != 0 and total_maximum != 0"
                    data-bs-toggle="modal" data-bs-target=".bd-example-modal-xl">
                     <i class="fa fa-truck" aria-hidden="true"/>
                     Return

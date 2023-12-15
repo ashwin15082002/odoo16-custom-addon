@@ -33,4 +33,3 @@ class SaleReturn(models.Model):
                 order.picking_ids = picking
         if transfer['move_ids']:
             return transfer
-

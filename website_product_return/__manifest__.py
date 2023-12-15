@@ -13,7 +13,6 @@
     # data files always loaded at installation
     'data': [
         'views/portal_views.xml',
-        # 'views/return_template.xml',
     ],
     'assets': {
         'web.assets_frontend': [

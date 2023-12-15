@@ -38,6 +38,7 @@ odoo.define('website_product_return.return', function (require) {
                       'quantity': el.find(".quantity").val(),})
 
         });
+        console.log(val)
 
         this._rpc({
                 model: 'stock.picking',
