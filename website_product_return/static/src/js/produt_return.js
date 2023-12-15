@@ -1,7 +1,6 @@
 odoo.define('website_product_return.return', function (require) {
     "use strict";
     var publicWidget = require('web.public.widget');
-//    var rpc = require('web.rpc');
 
     publicWidget.registry.SaleReturn = publicWidget.Widget.extend({
     selector: '#sale_return_form',
@@ -38,18 +37,16 @@ odoo.define('website_product_return.return', function (require) {
                       'quantity': el.find(".quantity").val(),})
 
         });
-        console.log(val)
 
         this._rpc({
-                model: 'stock.picking',
-                method: 'create_picking',
-                args: [val,order],
-                }).then(function(result){
-                    console.log(result)
-                    if (result){
-                        location.reload();
-                    }
-                })
+            model: 'stock.picking',
+            method: 'create_picking',
+            args: [val,order],
+            }).then(function(result){
+                if (result){
+                    location.reload();
+                }
+            })
     }
 
     });
